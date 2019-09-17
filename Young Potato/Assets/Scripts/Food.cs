@@ -132,7 +132,7 @@ public class Food : Grabbable
 
         cutLocations[0].transform.localPosition -= cutOffset;
         cutLocations[cutLocations.Length - 1].transform.localPosition += cutOffset;
-        
+        //boo
     }
 
     private void Awake()
