@@ -120,6 +120,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        for(int i =0; i < currentlyServing.Length;i++)
+        {
+            if(currentlyServing[i] == null) { return; }
+
+            if(currentlyServing[i].IsTiredOfWaiting)
+            {
+                fillPosition(i);
+            }
+        }
+
 
         UIManager.UpdateIndexText();
         UIManager.DeactivateFoodInformation();

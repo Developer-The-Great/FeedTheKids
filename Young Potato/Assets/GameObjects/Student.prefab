@@ -68,6 +68,9 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   setGoal: 0
   speed: 4
+  preferedFood: 0
+  MaxWaitTime: 0
+  isBroke: 0
   fixedYPosition: 2
 --- !u!136 &6700795020553421589
 CapsuleCollider:
@@ -95,6 +98,7 @@ GameObject:
   - component: {fileID: 7303473179653434481}
   - component: {fileID: 7303473179653434494}
   - component: {fileID: 7303473179653434495}
+  - component: {fileID: 3133888016607152010}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -141,7 +145,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2852bfa23957ca4f873f6fac24c44d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,3 +179,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3133888016607152010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303473179653434493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7528a1f0980e114cbcc47d9378b12fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

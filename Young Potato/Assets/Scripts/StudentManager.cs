@@ -12,9 +12,11 @@ public class StudentManager : MonoBehaviour
     private Transform ExitPoint;
 
     public GameObject studentObj;
+    public float maxWaitTime;
 
     private Queue<float> studentBudgetQueue;
     private Queue<FoodType> studentRequestQueue;
+    private Queue<float> studentWaitTimeQueue; 
 
     private float money;
 
@@ -92,7 +94,7 @@ public class StudentManager : MonoBehaviour
         {
             student = Instantiate(studentObj, SpawnPoint.position, Quaternion.identity).GetComponent<Student>();
 
-            student.Init(GetNextStudentBudget(), 0, positionFill, this,GetNextStudentRequest());
+            student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime());
             student.EnterPlayArea(lineTransform[positionFill].position);
         }
         else
@@ -113,7 +115,8 @@ public class StudentManager : MonoBehaviour
 
         studentBudgetQueue = new Queue<float>();
         studentRequestQueue = new Queue<FoodType>();
-
+        studentWaitTimeQueue = new Queue<float>();
+        
 
         nutritionGiven = new float[studentBudgets.Length];
 
@@ -129,19 +132,27 @@ public class StudentManager : MonoBehaviour
             studentRequestQueue.Enqueue(studentRequest[i]);
         }
 
+        for (int i = 0; i < studentBudgets.Length; i++)
+        {
+            studentWaitTimeQueue.Enqueue(40 - (studentBudget[i]));
+        }
+
         StudentsServed = 0;
 
     }
 
-   
+   private float getNextStudentWaitTime()
+    {
+        return studentWaitTimeQueue.Dequeue();
+    }
 
 
-    public float GetNextStudentBudget()
+    private float getNextStudentBudget()
     {
         return studentBudgetQueue.Dequeue();
     }
 
-    public FoodType GetNextStudentRequest()
+    private FoodType getNextStudentRequest()
     {
         return studentRequestQueue.Dequeue();
     }

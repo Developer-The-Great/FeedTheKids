@@ -9,9 +9,8 @@ public class Tray : Container
     
     Destroyer foodDestroyer;
 
-    public List<Food> foodInTray { private set; get; }
+   
 
-    private float totalNutrition;
 
     public float DishCost { get; private set; }
 
@@ -21,16 +20,12 @@ public class Tray : Container
 
    
 
-    public float Nutrition
-    {
-        get { return totalNutrition; }
-        private set { totalNutrition = value; }
-    }
+   
 
     private void Start()
     {
         player.DishBudget = 0;
-        foodInTray = new List<Food>();
+       
         //foodDestroyer = GetComponent<Destroyer>();
 
         
@@ -40,7 +35,7 @@ public class Tray : Container
     public void FixedUpdate()
     {
         DishCost = 0;
-        totalNutrition = 0;
+        
         foodInTray.Clear();
     }
 
@@ -60,21 +55,7 @@ public class Tray : Container
 
     }
 
-    public Food CheckDuplicate(Food foodToCheck)
-    {
-        
-
-        foreach(Food food in foodInTray)
-        {
-            if(food == foodToCheck)
-            {
-                return null;
-            }
-        }
-
-        return foodToCheck;
-    }
-
+    
     public void Update()
     {
 
