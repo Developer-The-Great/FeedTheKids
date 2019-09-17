@@ -132,7 +132,7 @@ public class Food : Grabbable
 
         cutLocations[0].transform.localPosition -= cutOffset;
         cutLocations[cutLocations.Length - 1].transform.localPosition += cutOffset;
-        //boo
+  
     }
 
     private void Awake()
@@ -183,7 +183,7 @@ public class Food : Grabbable
             float angle = Quaternion.Angle(transform.rotation, targetRotation) ;
 
 
-            if (angle >= 1.5f)
+            if (angle >= 2f)
             {
 
                 float lerpVal = 0.05f;

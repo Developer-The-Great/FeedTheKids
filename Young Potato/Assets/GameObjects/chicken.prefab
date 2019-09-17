@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liftingOffset: {x: 0, y: 0.5, z: 0}
-  addedSeperation: 0.04
+  addedSeperation: 0.03
   foodType: 0
   BurnCoefficient: 1
   cookTime: 20
@@ -411,8 +411,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.044324245, y: 0.059326857, z: 0.09853607}
-  m_Center: {x: 0.003737065, y: 0.00031947027, z: 0.0072492342}
+  m_Size: {x: 0.042831983, y: 0.059326857, z: 0.09853607}
+  m_Center: {x: 0.0044831955, y: 0.00031947027, z: 0.0072492342}
 --- !u!1 &6714545766128968159
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,8 +456,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.045432765, y: 0.059326857, z: 0.09853607}
-  m_Center: {x: 0.0029249093, y: 0.00031947027, z: 0.007249235}
+  m_Size: {x: 0.045221433, y: 0.059326857, z: 0.09853607}
+  m_Center: {x: 0.002819245, y: 0.00031947027, z: 0.007249235}
 --- !u!1 &6944548874690755006
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,8 +532,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.044324245, y: 0.059326857, z: 0.09853607}
-  m_Center: {x: 0.003737065, y: 0.00031947027, z: 0.0072492342}
+  m_Size: {x: 0.041352674, y: 0.059326857, z: 0.09853607}
+  m_Center: {x: 0.0037305844, y: 0.00031947027, z: 0.0072492342}
 --- !u!1 &6972528702082325353
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,8 +712,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.042938598, y: 0.059326857, z: 0.09853607}
-  m_Center: {x: 0.0035985, y: 0.00031947027, z: 0.0072492342}
+  m_Size: {x: 0.039911333, y: 0.059326857, z: 0.09853607}
+  m_Center: {x: 0.0036328228, y: 0.00031947027, z: 0.0072492342}
 --- !u!1 &8581285524983695193
 GameObject:
   m_ObjectHideFlags: 0
