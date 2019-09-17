@@ -25,13 +25,11 @@ public class RawFoodPlate : Container
 
     private void OnTriggerEnter(Collider other)
     {
-        Food food = CheckDuplicate( other.transform.root.GetComponent<Food>());
-      
+        Food food = other.transform.root.GetComponent<Food>();
 
-        if(food)
+
+        if (food)
         {
-            foodCount++;
-            foodInTray.Add(food);
             if (!food.InContainer)
             {
                 player.IngredientBudget -= food.FoodCost;
@@ -43,11 +41,14 @@ public class RawFoodPlate : Container
     }
     private void OnTriggerStay(Collider other)
     {
-        Food food = other.transform.root.GetComponent<Food>();
+        
+        Food food = CheckDuplicate(other.transform.root.GetComponent<Food>());
 
         if (food)
         {
             foodCount++;
+            foodInTray.Add(food);
+
         }
 
     }

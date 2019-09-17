@@ -2756,6 +2756,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: cutTest (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1627456392638784689, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1627456392638784653, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4905,6 +4910,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: cutTest (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1627456392638784689, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1627456392638784653, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5571,6 +5581,7 @@ MonoBehaviour:
   - {fileID: 238692165}
   studentObj: {fileID: 7303473179174444290, guid: 7a296b9cdf6b41c45a53751601566e34,
     type: 3}
+  maxWaitTime: 0
   studentBudgets:
   - 6
   - 4
@@ -7079,6 +7090,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cutTest (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627456392638784689, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1627456392638784653, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
         type: 3}
@@ -10963,6 +10979,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: cutTest (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1627456392638784689, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1627456392638784653, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11586,6 +11607,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cutTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627456392638784689, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1627456392638784653, guid: 5cc1d4ea0a4bbd04797190629d2e868b,
         type: 3}

@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public struct FoodData
+{
+    public float boiledness;
+    public float friedness;
+    public float burntness;
+    public float coldness;
+}
 [RequireComponent(typeof(Rigidbody))]
 public class Food : Grabbable
 {
     [SerializeField] [Range(0,1)] float addedSeperation;
-    [SerializeField] private FoodType foodType;
+    [SerializeField] public FoodType FoodType { get; private set; }
 
 
 
@@ -29,17 +37,6 @@ public class Food : Grabbable
     public float showBurntness;
     public float showColdness;
 
-    public FoodType Type
-    {
-        get
-        {
-            return foodType;
-        }
-        set
-        {
-            foodType = value;
-        }
-    }
 
     public Transform[] cutLocations;
     public GameObject[] foodBits;
@@ -49,6 +46,7 @@ public class Food : Grabbable
 
     public bool InContainer;
     public bool isOnCuttingBoard;
+    public bool IsCookedInTimeStep;
 
 
     public Vector3 initialLoc;
@@ -70,8 +68,14 @@ public class Food : Grabbable
     ///test
     public void Init(Vector3 pPositon,GameObject[] pFoodBits,Transform[] pCutLocations,
         Vector3 pOffset,Vector3 pCutOffset,Vector3[] localScale,
-        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation)
+        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation,FoodData data)
     {
+
+        Friedness = data.friedness;
+        Boildness = data.boiledness;
+        Coldness = data.coldness;
+        Burntness = data.burntness;
+
         cookTime = pCookTime;
 
         addedSeperation = pSeperation;
@@ -161,11 +165,15 @@ public class Food : Grabbable
         return foodBits.Length > 1;
     }
 
+    private void FixedUpdate()
+    {
+        IsCookedInTimeStep = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "frying")
         {
-
             fry();
         }
         else if(other.tag == "boiling")
@@ -270,6 +278,13 @@ public class Food : Grabbable
 
     public float GetReadiness()
     {
+
+        if(FoodType == FoodType.Apple)
+        {
+            return 1.0f;
+        }
+
+
         float readiness = Friedness;
 
         if (Boildness > Friedness)
@@ -281,25 +296,39 @@ public class Food : Grabbable
 
     private void fry()
     {
+        if(IsCookedInTimeStep)
+        {
+            
+            return;
+        }
+
         if (Friedness > 1.0f)
         {
             Burntness += add * Time.deltaTime;
-
+            IsCookedInTimeStep = true;
         }
         else
         {
             Friedness += add * Time.deltaTime;
+            IsCookedInTimeStep = true;
         }
     }
     private void boil()
     {
+        if (IsCookedInTimeStep)
+        {
+
+            return;
+        }
+
         if (Boildness > 1.0f)
         {
             Burntness += add * Time.deltaTime;
-
+            IsCookedInTimeStep = true;
         }
         else
         {
+            IsCookedInTimeStep = true;
             Boildness += add * Time.deltaTime;
         }
     }
@@ -333,6 +362,13 @@ public class Food : Grabbable
             return;
         }
 
+        //get food data
+        FoodData foodData;
+        foodData.coldness = Coldness;
+        foodData.burntness = Burntness;
+        foodData.boiledness = Boildness;
+        foodData.friedness = Friedness;
+
 
         GameObject[] firstFoodBit = new GameObject[FoodBitIndex];
 
@@ -362,10 +398,11 @@ public class Food : Grabbable
         //firstFoodObj.transform.rotation = transform.rotation;
 
         Food firstFoodPiece = firstFoodObj.AddComponent<Food>();
+
         firstFoodPiece.Init(transform.position, firstFoodBit, firstCutLocations, 
             offset, cutOffset, foodLocalScale,
             liftingOffset,costPerPiece, transform.rotation,
-            cookTime,initialLoc,addedSeperation);
+            cookTime,initialLoc,addedSeperation, foodData);
 
 
         ///////////////create other cut 
@@ -400,7 +437,7 @@ public class Food : Grabbable
         otherFoodPiece.Init(newPosition, otherFoodBit, otherCutLocations, 
             offset, cutOffset, otherFoodLocalScale, 
             liftingOffset,costPerPiece,transform.rotation,
-            cookTime, initialLoc, addedSeperation);
+            cookTime, initialLoc, addedSeperation, foodData);
 
         Destroy(gameObject);
 

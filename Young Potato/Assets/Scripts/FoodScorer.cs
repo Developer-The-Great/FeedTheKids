@@ -77,7 +77,7 @@ public class FoodScorer : MonoBehaviour
                 }
             }
 
-            if(student.preferedFood == food.Type)
+            if(student.preferedFood == food.FoodType)
             {
                 gotRequestedFood = true;
             }

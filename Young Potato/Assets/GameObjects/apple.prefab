@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liftingOffset: {x: 0, y: 0.5, z: 0}
   addedSeperation: 0.02
-  foodType: 0
+  foodType: 3
   BurnCoefficient: 1
   cookTime: 12
   showFried: 0
