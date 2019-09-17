@@ -1,0 +1,3 @@
+Smoke_01 is the steam for the pot
+Smoke_02 is the smoke for the pan
+Smoke_03 is the steam for hot food, just adjust the start color as needed
