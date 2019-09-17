@@ -12,7 +12,7 @@ public class FoodStateChanger : MonoBehaviour
     private float friedness;
     private float boildness;
 
-    public Food food;
+    Food food;
 
     // Start is called before the first frame update
 
