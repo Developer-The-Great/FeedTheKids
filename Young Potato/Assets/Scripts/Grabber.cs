@@ -75,6 +75,7 @@ public class Grabber : MonoBehaviour
     public void holdGrabbable()
     {
         grabbedObject.transform.position = mouseWorldPosition + grabbedObject.liftingOffset;
+        grabbedObject.GetComponent<Grabbable>().stopAngularVelocity();
     }
 
     

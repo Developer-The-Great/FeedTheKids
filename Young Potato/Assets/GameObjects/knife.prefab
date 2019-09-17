@@ -62,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.011955619, y: 0.048781395, z: 0.19149303}
-  m_Center: {x: 0.0010767579, y: 0.0030243397, z: -0.01757288}
+  m_Size: {x: 0.0023354292, y: 0.048781395, z: 0.19149303}
+  m_Center: {x: 0.00007349253, y: 0.0030243397, z: -0.01757288}
 --- !u!65 &3985869475400482300
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012002945, y: 0.048619032, z: 0.08934879}
-  m_Center: {x: 0.0010869503, y: 0.003041625, z: -0.15895891}
+  m_Size: {x: 0.012002945, y: 0.027539968, z: 0.08934879}
+  m_Center: {x: 0.0010869503, y: 0.013581157, z: -0.15895891}
 --- !u!114 &6320184803448126857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liftingOffset: {x: 0, y: 0.5, z: 0}
   acceptableDist: 0.01
+  knifePart: {fileID: 0}
   isCutting: 0
 --- !u!1001 &3496647173967898147
 PrefabInstance:
@@ -99,6 +100,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4349541550263936785}
     m_Modifications:
+    - target: {fileID: 3179957815137488369, guid: 47ae271eecbaf724cad07c76b9d0c122,
+        type: 3}
+      propertyPath: m_Name
+      value: Knife_01_Clean (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1907875943979532258, guid: 47ae271eecbaf724cad07c76b9d0c122,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -163,11 +169,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3179957815137488369, guid: 47ae271eecbaf724cad07c76b9d0c122,
-        type: 3}
-      propertyPath: m_Name
-      value: Knife_01_Clean (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47ae271eecbaf724cad07c76b9d0c122, type: 3}

@@ -8,6 +8,7 @@ public class Knife : Grabbable
     Player player;
     public Queue<Vector3> knifePositions;
     public float acceptableDist = 0.01f;
+    public BoxCollider knifePart;
     private Food food;
 
     private Vector3 initialLimitingOffset;
@@ -50,7 +51,7 @@ public class Knife : Grabbable
         {
             rb.angularVelocity = Vector3.zero;
             followObjectOrientation(food.transform.rotation);
-            Debug.Log("Follow Object");
+
         }
         
         if(player.grabber.grabbedObject != this)
@@ -89,7 +90,7 @@ public class Knife : Grabbable
 
     public void Slice(Vector3 endPosition)
     {
-        Debug.Log("knife.slice() called");
+
 
         if (!food) { return; }
 
@@ -142,4 +143,6 @@ public class Knife : Grabbable
     {
         rb.isKinematic = isKinematic;
     }
+
+   
 }

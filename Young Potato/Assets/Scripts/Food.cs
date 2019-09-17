@@ -81,7 +81,7 @@ public class Food : Grabbable
         costPerPiece = pCostPerPiece;
         cutOffset = pCutOffset;
 
-        Debug.Log("init called");
+
 
         liftingOffset = pLiftingOffset;
 
@@ -126,7 +126,7 @@ public class Food : Grabbable
         rb.velocity = Vector3.zero;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        transform.position = pPositon;
+        transform.position = pPositon ;
         transform.rotation = pRotation;
 
 
@@ -215,6 +215,8 @@ public class Food : Grabbable
                 }
                 
                 Cut(contactPoint);
+                Debug.Log("cutting food");
+                //StartCoroutine(knife.disableCollision());
                 knife.isCutting = false;
             }
 

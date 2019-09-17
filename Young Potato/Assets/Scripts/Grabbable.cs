@@ -28,7 +28,11 @@ public abstract class Grabbable : MonoBehaviour
     {
         
     }
+    public void stopAngularVelocity()
+    {
+        rb.angularVelocity = Vector3.zero;
 
+    }
 
     public virtual void SetRayCastInvisibility(bool isInvisible)
     {
