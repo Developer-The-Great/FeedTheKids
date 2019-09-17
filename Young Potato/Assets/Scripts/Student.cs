@@ -37,23 +37,26 @@ public class Student : MonoBehaviour
     //amount of money student has
     public float StudentBudget { get; private set; }
 
+    public bool IsTiredOfWaiting { get; private set; }
+
     public FoodType preferedFood;
 
-    private float MaxWaitTime;
-    private float timeWaited;
+    [SerializeField] private float MaxWaitTime;
+     private float timeWaited;
 
     public bool isBroke;
 
     [SerializeField] private float fixedYPosition;
 
-    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType Request)
+    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime)
     {
         StudentBudget = pBudget;
         statisfaction = pStatisfaction;
         StudentIndex = pIndex;
         studentManager = pStudentManager;
+        MaxWaitTime = pMaxWaitTime;
 
-        preferedFood = Request;
+        preferedFood = pRequest;
 
         isBroke = Mathf.Approximately(pBudget, 0);
     }
@@ -72,7 +75,9 @@ public class Student : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(setGoal)
+        UpdateWaitTime();
+
+        if (setGoal)
         {
             Vector3 direction = target - gameObject.transform.position;
             Move(GetYIgnoreVec(direction));
@@ -89,6 +94,11 @@ public class Student : MonoBehaviour
         {
             setGoal = false;
             gameObject.transform.position = GetYIgnoreVec(target);
+
+            if(Vector3.Distance(target,studentManager.lineTransform[StudentIndex].position) < 0.01f)
+            {
+
+            }
         }
         
         if(Vector3.Distance(transform.position,studentManager.GetExitPosition()) < 1)
@@ -122,6 +132,17 @@ public class Student : MonoBehaviour
     {
 
         GoTo(studentManager.GetExitPosition());
+    }
+
+    public void UpdateWaitTime()
+    {
+        timeWaited += Time.deltaTime;
+
+        if(timeWaited > MaxWaitTime)
+        {
+            IsTiredOfWaiting = true;
+            timeWaited = MaxWaitTime;
+        }
     }
 
   
