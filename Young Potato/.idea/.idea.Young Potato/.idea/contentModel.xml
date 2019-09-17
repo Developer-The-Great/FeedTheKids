@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\C4\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\C4\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_Young Potato.889351742.00" t="ExcludeRecursive" />
+    <e p="C:\Users\C4\Documents\feedthekids\Young Potato" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Particles" t="Include">
+          <e p="Smoke_01" t="Include">
+            <e p="Prefabs" t="Include">
+              <e p="READ ME.txt" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Refraction" t="Include">
+          <e p="Flow.cginc" t="Include" />
+          <e p="RefractiveWater.shader" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AddForce.cs" t="Include" />
+          <e p="Bubble.cs" t="Include" />
+          <e p="BubbleGenerator.cs" t="Include" />
+          <e p="Container.cs" t="Include" />
+          <e p="Debugging" t="Include">
+            <e p="DirectionDisplayer.cs" t="Include" />
+            <e p="Instantiator.cs" t="Include" />
+          </e>
+          <e p="Destroyer.cs" t="Include" />
+          <e p="Food.cs" t="Include" />
+          <e p="FoodScorer.cs" t="Include" />
+          <e p="FoodStateChanger.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="Grabbable.cs" t="Include" />
+          <e p="Grabber.cs" t="Include" />
+          <e p="InputController.cs" t="Include" />
+          <e p="Knife.cs" t="Include" />
+          <e p="MaterialChanger.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="RawFoodPlate.cs" t="Include" />
+          <e p="SimpleCameraController.cs" t="Include" />
+          <e p="Student.cs" t="Include" />
+          <e p="StudentManager.cs" t="Include" />
+          <e p="TestScript.cs" t="Include" />
+          <e p="Tray.cs" t="Include" />
+          <e p="UIStuff" t="Include">
+            <e p="Flicker.cs" t="Include" />
+            <e p="UIManager.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Shader" t="Include">
+          <e p="foodShader.shader" t="Include" />
+          <e p="testShader.shader" t="Include" />
+        </e>
+        <e p="Tutorial_Info" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="ReadmeEditor.cs" t="Include" />
+            </e>
+            <e p="Readme.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Young Potato.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

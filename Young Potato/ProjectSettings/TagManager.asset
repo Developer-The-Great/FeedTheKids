@@ -28,6 +28,7 @@ TagManager:
   - scorer
   - moneyEarnedText
   - endscreen
+  - Budgetmanager
   layers:
   - Default
   - TransparentFX

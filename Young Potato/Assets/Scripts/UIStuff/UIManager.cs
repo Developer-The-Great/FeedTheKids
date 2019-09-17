@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +41,15 @@ public class UIManager : MonoBehaviour
 
     private CanvasScaler scaler;
 
-
+    private GameObject bManager;
+    [SerializeField] private Transform[] racks;
+    [SerializeField] private GameObject[] bBills1;
+    [SerializeField] private GameObject[] bBills2;
+    [SerializeField] private GameObject[] bBills3;
+    [SerializeField] private GameObject[] tBills1;
+    [SerializeField] private GameObject[] tBills2;
+    [SerializeField] private GameObject[] tBills3;
+    
    
 
     private void Awake()
@@ -48,7 +57,27 @@ public class UIManager : MonoBehaviour
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
 
         player = GetComponent<Player>();
-        dishText = GameObject.FindGameObjectWithTag("dishes").GetComponent<Text>();
+        bManager = GameObject.FindGameObjectWithTag("Budgetmanager");
+        GameObject[][] bRacks = {bBills1, bBills2, bBills3};
+        GameObject[][] tRacks = {tBills1, tBills2, tBills3};
+        for (int i = 0; i < 3; i++)
+        {
+            racks[i] = bManager.transform.GetChild(i);
+            for (float j = 0; j < 20; j++)
+            {
+                if (j % 2 == 0)
+                {
+                    bRacks[i][(int)Mathf.Floor(j / 2)] = racks[i].GetChild((int)j).gameObject;
+                }
+                else
+                {
+                    tRacks[i][(int)Mathf.Floor(j / 2)] = racks[i].GetChild((int)j).gameObject;
+                }
+            }
+            Debug.Log("made rack " + i);
+        }
+        
+        
 
         moneyEarnedText = GameObject.FindGameObjectWithTag("moneyEarnedText").GetComponent<Text>();
 
@@ -56,7 +85,6 @@ public class UIManager : MonoBehaviour
 
         ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
 
-        budgetText = GameObject.FindGameObjectWithTag("budgetText").GetComponent<Text>();
         served = GameObject.FindGameObjectWithTag("servingText").GetComponent<Text>();
 
         tastiness = GameObject.FindGameObjectWithTag("tastinessText").GetComponent<Text>();
@@ -113,13 +141,44 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDishText()
     {
-        dishText.text = "Dish Cost: " + player.DishBudget;
-        
+        GameObject[][] tRacks = {tBills1, tBills2, tBills3};
+        for (int i = 0; i < 3; i++)
+        {
+            if (player.tray[i].DishCost % 1 == 0)
+            {
+                for (int j = 0; j < player.tray[i].DishCost; i++)
+                {
+                    tRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                }
+            }
+            else
+            {
+                for (int j = 0; j < player.tray[i].DishCost-1; i++)
+                {
+                    tRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                    if (j == player.tray[i].DishCost-1)
+                    {
+                        tRacks[i][j+1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                    }
+                }
+                
+            }
+        }
+        Debug.Log("Updated dish values");
     }
 
     public void UpdateBudgetText()
     {
-        budgetText.text = "Student Budget: " + player.StudentBudget;
+        GameObject[][] tRacks = {tBills1, tBills2, tBills3};
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < player.currentlyServing[i].StudentBudget; i++)
+            {
+                tRacks[i][j].GetComponent<Image>().color = new Color(255, 255, 255, 90);
+            }
+        }
+        Debug.Log("Updated budgets");
+        
     }
 
     public void UpdateIndexText()

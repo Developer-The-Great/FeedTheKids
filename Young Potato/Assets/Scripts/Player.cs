@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private InputController inputController;
     private UIManager UIManager;
 
-    [SerializeField] private Tray[] tray;
+    [SerializeField] public Tray[] tray { private set; get; }
 
     [SerializeField] private float DishCost;
     [SerializeField] private float IngredientCost;

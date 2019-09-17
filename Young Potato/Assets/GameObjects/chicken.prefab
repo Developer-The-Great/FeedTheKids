@@ -187,7 +187,7 @@ MonoBehaviour:
   InContainer: 1
   isOnCuttingBoard: 0
   initialLoc: {x: 0.375, y: 0, z: 0}
-  costPerPiece: 0.5
+  costPerPiece: 1
 --- !u!1 &3354132066145533386
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!65 &6121892454429696935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -624,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &7280211063450300783
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &7800541924702884102
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &8991984989093293120
 GameObject:
   m_ObjectHideFlags: 0
