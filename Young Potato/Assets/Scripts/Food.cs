@@ -14,9 +14,14 @@ public struct FoodData
 public class Food : Grabbable
 {
     [SerializeField] [Range(0,1)] float addedSeperation;
-    [SerializeField] public FoodType FoodType { get; private set; }
+    public FoodType FoodType
+    {
+        get { return foodType; }
+        private set { foodType = value; }
+       
+    }
 
-
+    [SerializeField] private FoodType foodType;
 
     [SerializeField] private float BurnCoefficient = 1f;
     float add;

@@ -8,6 +8,7 @@ public enum FoodType
     Rice,
     Potato,
     Apple,
+    Hamburger,
     None
 
 }
