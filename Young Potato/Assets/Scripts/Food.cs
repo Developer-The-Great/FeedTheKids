@@ -142,6 +142,7 @@ public class Food : Grabbable
     private void Awake()
     {
         InContainer = true;
+        Coldness = 1;
     }
 
     void Start()
@@ -158,6 +159,8 @@ public class Food : Grabbable
         showBoildness = Boildness;
         showColdness = Coldness;
         showBurntness = Burntness;
+
+        coolDown();
     }
 
     public bool IsCutable()
@@ -301,15 +304,18 @@ public class Food : Grabbable
             
             return;
         }
+        
 
         if (Friedness > 1.0f)
         {
             Burntness += add * Time.deltaTime;
+            heatUp();
             IsCookedInTimeStep = true;
         }
         else
         {
             Friedness += add * Time.deltaTime;
+            heatUp();
             IsCookedInTimeStep = true;
         }
     }
@@ -321,16 +327,33 @@ public class Food : Grabbable
             return;
         }
 
+        heatUp();
+
         if (Boildness > 1.0f)
         {
             Burntness += add * Time.deltaTime;
+            heatUp();
             IsCookedInTimeStep = true;
         }
         else
         {
             IsCookedInTimeStep = true;
+            heatUp();
             Boildness += add * Time.deltaTime;
+            
         }
+    }
+
+    private void heatUp()
+    {
+        Coldness -= add * 2 * Time.deltaTime;
+    }
+
+    private void coolDown()
+    {
+        Coldness += add * Time.deltaTime;
+
+        Coldness = Mathf.Clamp(Coldness, 0, 1);
     }
 
     public void Cut(Vector3 knifeCutLocation)
