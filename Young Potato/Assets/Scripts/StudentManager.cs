@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StudentManager : MonoBehaviour
 {
-    FoodScorer scorer;
+    public FoodScorer scorer;
     UIManager UIManager;
 
     public Transform[] lineTransform = new Transform[3];
