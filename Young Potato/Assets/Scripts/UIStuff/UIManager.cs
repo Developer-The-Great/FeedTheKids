@@ -216,7 +216,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMoneyEarnedText()
     {
-        moneyEarnedText.text = "Money earned: $" + studentManager.moneyEarned;
+        moneyEarnedText.text = "$" + studentManager.moneyEarned;
     }
 
     public void UpdateRequestText(FoodType foodType)
