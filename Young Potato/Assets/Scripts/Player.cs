@@ -107,9 +107,9 @@ public class Player : MonoBehaviour
 
         Debug.Log("intialize player");
 
-        fillPosition(0);
-        fillPosition(1);
-        fillPosition(2);
+        fillPosition(0,false);
+        fillPosition(1, false);
+        fillPosition(2, false);
 
         StudentBudget = studentManager.studentBudget[0];
         UIManager.UpdateBudgetText();
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
             if(currentlyServing[i].IsTiredOfWaiting)
             {
-                fillPosition(i);
+                fillPosition(i,true);
             }
         }
 
@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            fillPosition(currentlySelectedStudent);
+            fillPosition(currentlySelectedStudent,false);
 
         }
 
@@ -251,10 +251,10 @@ public class Player : MonoBehaviour
         }
 
     }
-   
 
 
-    private void fillPosition(int positionIndex)
+
+    private void fillPosition(int positionIndex, bool isTimeChecking)
     {
 
         if(positionIndex == -1) { return; }
@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
         if (previousStudent)
         {
 
-            if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget)
+            if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget && !isTimeChecking)
             {
 
                 return;

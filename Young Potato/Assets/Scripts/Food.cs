@@ -287,7 +287,7 @@ public class Food : Grabbable
     public float GetReadiness()
     {
 
-        if(FoodType == FoodType.Apple)
+        if(FoodType == FoodType.Apple || FoodType == FoodType.Hamburger)
         {
             return 1.0f;
         }

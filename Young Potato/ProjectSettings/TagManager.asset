@@ -29,6 +29,8 @@ TagManager:
   - moneyEarnedText
   - endscreen
   - Budgetmanager
+  - MicrowaveDoor
+  - MicrowaveButton
   layers:
   - Default
   - TransparentFX
