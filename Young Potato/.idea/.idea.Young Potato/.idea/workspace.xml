@@ -47,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/UIStuff/UIManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+            <state relative-caret-position="372">
+              <caret line="169" column="9" lean-forward="true" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
               <folding>
                 <marker date="1568801633283" expanded="true" signature="6:114" ph="..." />
                 <marker date="1568801633283" expanded="true" signature="146:180" ph="{...}" />
@@ -263,7 +263,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="233" />
     <option name="y" value="118" />
     <option name="width" value="1440" />
@@ -324,12 +324,12 @@
       <updated>1568708408067</updated>
       <workItem from="1568708420041" duration="11000" />
       <workItem from="1568724508418" duration="15344000" />
-      <workItem from="1568798163484" duration="3221000" />
+      <workItem from="1568798163484" duration="4029000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18576000" />
+    <option name="totallyTimeSpent" value="19384000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -342,7 +342,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="233" y="118" width="1440" height="780" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2536232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -583,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/UIStuff/UIManager.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+        <state relative-caret-position="372">
+          <caret line="169" column="9" lean-forward="true" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
           <folding>
             <marker date="1568801633283" expanded="true" signature="6:114" ph="..." />
             <marker date="1568801633283" expanded="true" signature="146:180" ph="{...}" />
