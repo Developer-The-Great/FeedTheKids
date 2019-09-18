@@ -40,6 +40,8 @@
             <e p="FoodStateChanger.cs" t="Include" />
             <e p="StudentStateChanger.cs" t="Include" />
           </e>
+          <e p="MicrowaveButton.cs" t="Include" />
+          <e p="MicrowaveDoor.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="RawFoodPlate.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />

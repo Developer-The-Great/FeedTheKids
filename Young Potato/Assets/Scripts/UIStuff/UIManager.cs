@@ -176,6 +176,10 @@ public class UIManager : MonoBehaviour
         GameObject[][] tRacks = {tBills1, tBills2, tBills3};
         for (int i = 0; i < 3; i++)
         {
+            for (int j = 0; j < 10; j++)
+            {
+                tRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0);
+            }
             if (player.currentlyServing[i] == null) continue;
             for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
             {
