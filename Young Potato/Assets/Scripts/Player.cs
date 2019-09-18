@@ -290,10 +290,9 @@ public class Player : MonoBehaviour
         }
 
     }
+    
 
-
-
-    private void fillPosition(int positionIndex, bool isTimeChecking)
+    public void fillPosition(int positionIndex, bool isTimeChecking)
     {
 
         if(positionIndex == -1) { return; }
