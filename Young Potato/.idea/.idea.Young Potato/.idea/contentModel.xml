@@ -30,13 +30,16 @@
           <e p="Destroyer.cs" t="Include" />
           <e p="Food.cs" t="Include" />
           <e p="FoodScorer.cs" t="Include" />
-          <e p="FoodStateChanger.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="Grabbable.cs" t="Include" />
           <e p="Grabber.cs" t="Include" />
           <e p="InputController.cs" t="Include" />
           <e p="Knife.cs" t="Include" />
           <e p="MaterialChanger.cs" t="Include" />
+          <e p="MaterialPropertyBlock" t="Include">
+            <e p="FoodStateChanger.cs" t="Include" />
+            <e p="StudentStateChanger.cs" t="Include" />
+          </e>
           <e p="Player.cs" t="Include" />
           <e p="RawFoodPlate.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
@@ -51,6 +54,7 @@
         </e>
         <e p="Shader" t="Include">
           <e p="foodShader.shader" t="Include" />
+          <e p="studentShader.shader" t="Include" />
           <e p="testShader.shader" t="Include" />
         </e>
         <e p="Tutorial_Info" t="Include">
