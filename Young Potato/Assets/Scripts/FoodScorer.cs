@@ -92,10 +92,10 @@ public class FoodScorer : MonoBehaviour
                 halfColdCount++;
             }
 
-            if (food.Coldness > 0.5f)
+            if (food.Coldness > 0.7f)
             {
                 halfColdCount++;
-                if (food.Coldness > 0.9f)
+                if (food.Coldness > 0.95f)
                 {
                     freezingFood = true;
                 }
@@ -108,16 +108,18 @@ public class FoodScorer : MonoBehaviour
             }
 
         }
-
+        Debug.Log("scoring begins");
         //do multiplier addition
-        if(majorBurnCount > 0)
+        if (majorBurnCount > 0)
         {
             if(majorBurnCount == foodInTray.Count)
             {
+                Debug.Log("AllHeavilyBurntPnl");
                 multiplier += AllHeavilyBurntPnl;
             }
             else if(majorBurnCount < foodInTray.Count)
             {
+                Debug.Log("OneHeavilyBurntPnl");
                 multiplier += OneHeavilyBurntPnl;
             }
             else
@@ -126,10 +128,12 @@ public class FoodScorer : MonoBehaviour
                 {
                     if (minorBurnCount == foodInTray.Count)
                     {
+                        Debug.Log("AllFoodBitBurntPnl");
                         multiplier += AllFoodBitBurntPnl;
                     }
                     else
                     {
+                        Debug.Log("OneFoodBurntPnl");
                         multiplier += OneFoodBurntPnl;
 
                     }
@@ -139,35 +143,45 @@ public class FoodScorer : MonoBehaviour
 
         if(fastcook)
         {
+            Debug.Log("FastCookMlp");
             multiplier += FastCookMlp;
         }
 
 
         if(rawFood)
         {
+            Debug.Log("rawFoodPnl");
             multiplier += rawFoodPnl;
         }
 
         if (gotRequestedFood)
         {
+            Debug.Log("RequestedFoodMlp");
             multiplier += RequestedFoodMlp;
         }
 
 
         if(halfColdCount == foodInTray.Count)
         {
+            Debug.Log("AllcoldFoodNoRawPnl");
             multiplier += AllcoldFoodNoRawPnl;
         }
         else if(halfColdCount < foodInTray.Count && halfColdCount >0)
         {
+            Debug.Log("OnecoldFoodNoRawPnl");
             multiplier += OnecoldFoodNoRawPnl;
         }
 
         if(freezingFood)
         {
+            Debug.Log("FreezingFoodPnl");
             multiplier += FreezingFoodPnl;
         }
-        return Mathf.Clamp(multiplier, 0, multiplier); ;
+
+        float result = Mathf.Clamp(multiplier, 0, multiplier);
+
+        Debug.Log("Result " + result);
+        return result;
 
     }
 

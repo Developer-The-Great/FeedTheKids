@@ -213,6 +213,7 @@ MonoBehaviour:
   cutOffset: {x: 0.45, y: 0, z: 0}
   InContainer: 0
   isOnCuttingBoard: 0
+  IsCookedInTimeStep: 0
   initialLoc: {x: 0.286, y: 0, z: 0}
   costPerPiece: 0.25
 --- !u!1 &2103127939791982779
@@ -257,7 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &2360449753024991574
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &2765860770829790052
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!114 &4315554450299929444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &7172703209014103830
 GameObject:
   m_ObjectHideFlags: 0

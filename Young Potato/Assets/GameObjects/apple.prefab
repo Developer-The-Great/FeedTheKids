@@ -186,6 +186,7 @@ MonoBehaviour:
   cutOffset: {x: 0.0276, y: 0, z: 0}
   InContainer: 1
   isOnCuttingBoard: 0
+  IsCookedInTimeStep: 0
   initialLoc: {x: 0.02, y: 0, z: 0}
   costPerPiece: 0.5
 --- !u!1 &2713552731815791231

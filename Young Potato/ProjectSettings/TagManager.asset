@@ -32,6 +32,7 @@ TagManager:
   - MicrowaveDoor
   - MicrowaveButton
   - MicrowaveFloor
+  - loadingBurntness
   layers:
   - Default
   - TransparentFX

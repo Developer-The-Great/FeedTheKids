@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     private Vector2 centerOffset;
     private Image centerCircle;
     private Image loadingCircle;
+    private Image burntnessCircle;
     private Image endScreen;
 
     private CanvasScaler scaler;
@@ -90,6 +91,8 @@ public class UIManager : MonoBehaviour
         tastiness = GameObject.FindGameObjectWithTag("tastinessText").GetComponent<Text>();
 
         loadingCircle = GameObject.FindGameObjectWithTag("loadingCircle").GetComponent<Image>();
+
+        burntnessCircle = GameObject.FindGameObjectWithTag("loadingBurntness").GetComponent<Image>();
 
         centerCircle = GameObject.FindGameObjectWithTag("centerCircle").GetComponent<Image>();
 
@@ -253,6 +256,11 @@ public class UIManager : MonoBehaviour
         loadingCircle.fillAmount = food.GetReadiness();
         loadingCircle.gameObject.SetActive(true);
 
+
+        burntnessCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition;
+        burntnessCircle.fillAmount = food.Burntness;
+        burntnessCircle.gameObject.SetActive(true);
+
         centerCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + centerOffset;
         centerCircle.gameObject.SetActive(true);
 
@@ -265,6 +273,7 @@ public class UIManager : MonoBehaviour
     public void DeactivateFoodInformation()
     {
         loadingCircle.gameObject.SetActive(false);
+        burntnessCircle.gameObject.SetActive(false);
         centerCircle.gameObject.SetActive(false);
         cost.gameObject.SetActive(false);
 
