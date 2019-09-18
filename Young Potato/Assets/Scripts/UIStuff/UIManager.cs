@@ -50,7 +50,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] tBills1;
     [SerializeField] private GameObject[] tBills2;
     [SerializeField] private GameObject[] tBills3;
-    
+
+    private GameObject earnings;
+    private GameObject buttons;
    
 
     private void Awake()
@@ -119,6 +121,9 @@ public class UIManager : MonoBehaviour
         okText = GameObject.Find("okText").GetComponent<Text>();
         moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
         requestText = GameObject.Find("request").GetComponent<Text>();
+
+        earnings = GameObject.FindGameObjectWithTag("Earnings");
+        buttons = GameObject.FindGameObjectWithTag("Buttons");
 
     }
 
@@ -219,7 +224,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMoneyEarnedText()
     {
-        moneyEarnedText.text = "$" + studentManager.moneyEarned;
+        float whole = Mathf.Round(studentManager.moneyEarned);
+        float deci = Mathf.Round((studentManager.moneyEarned - whole)*100)/100;
+        float earned = whole + deci;
+        moneyEarnedText.text = "$" + earned;
     }
 
     public void UpdateRequestText(FoodType foodType)
@@ -268,8 +276,8 @@ public class UIManager : MonoBehaviour
         centerCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + centerOffset;
         centerCircle.gameObject.SetActive(true);
 
-        cost.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + new Vector2(0, 5);
-        cost.text = food.FoodCost + "$";
+        cost.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + new Vector2(0, 12);
+        cost.text = "$" + food.FoodCost;
         cost.gameObject.SetActive(true);
 
 
@@ -290,8 +298,9 @@ public class UIManager : MonoBehaviour
         if (studentManager.CheckWin())
         {
             ingredientText.gameObject.SetActive(false);
-            dishText.gameObject.SetActive(false);
-            budgetText.gameObject.SetActive(false);
+            bManager.gameObject.SetActive(false);
+            earnings.gameObject.SetActive(false);
+            buttons.gameObject.SetActive(false);
 
             served.gameObject.SetActive(false);
             tastiness.gameObject.SetActive(false);
@@ -327,5 +336,18 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         served.gameObject.SetActive(false);
         tastiness.gameObject.SetActive(false);
+    }
+
+    public void next1()
+    {
+        player.fillPosition(0,false);
+    }
+    public void next2()
+    {
+        player.fillPosition(1,false);
+    }
+    public void next3()
+    {
+        player.fillPosition(2,false);
     }
 }
