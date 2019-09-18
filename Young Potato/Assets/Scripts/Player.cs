@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
 
     }
 
+    private float distanceMultiplier = 1.0f;
+
     public bool CutMode;
 
     private void Awake()
@@ -140,6 +142,7 @@ public class Player : MonoBehaviour
         RaycastHit Hit;
 
         bool mouseClickingOnObject = Input.GetMouseButton(0);
+        bool mouseDownClickingObject = Input.GetMouseButtonDown(0);
         bool mouseHoverOnObject = Physics.Raycast(ScreenToWorld, out Hit);
 
         if (mouseHoverOnObject)
@@ -152,16 +155,45 @@ public class Player : MonoBehaviour
 
             Grabbable grabbedObject = HitObj.GetComponent<Grabbable>();
 
-            if(grabbedObject)
+
+            MicrowaveDoor door = Hit.transform.gameObject.GetComponent<MicrowaveDoor>();
+            MicrowaveButton button = Hit.transform.gameObject.GetComponent<MicrowaveButton>();
+
+            if(Hit.transform.gameObject.tag == "MicrowaveFloor")
             {
-                handleGrabbable(grabbedObject, mouseClickingOnObject);
+                distanceMultiplier = 0.5f;
             }
             else
             {
-                
+                distanceMultiplier = 1.0f;
+            }
+
+
+            if (grabbedObject)
+            {
+                handleGrabbable(grabbedObject, mouseClickingOnObject);
+            }
+
+            else if (door)
+            {
+                if (mouseDownClickingObject)
+                {
+                    door.isOpen = !door.isOpen;
+                }
+            }
+            else if (button)
+            {
+                if (mouseDownClickingObject)
+                {
+                    button.addTime();
+                }
+            }
+            else
+            {
+
                 Student student = HitObj.GetComponent<Student>();
-                
-                if(student)
+
+                if (student)
                 {
                     currentlySelectedStudent = student.StudentIndex;
                     StudentBudget = student.StudentBudget;
@@ -180,7 +212,7 @@ public class Player : MonoBehaviour
 
         if (grabber.IsGrabbing)
         {
-            grabber.holdGrabbable();
+            grabber.holdGrabbable(distanceMultiplier);
 
         }
 

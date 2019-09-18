@@ -188,6 +188,10 @@ public class Food : Grabbable
         {
             boil();
         }
+        else if(other.tag == "MicrowaveButton")
+        {
+            heatUp();
+        }
         else if(other.tag == "cuttingBoard" && foodBits.Length > 1)
         {
 

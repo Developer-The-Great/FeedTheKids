@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
                     tRacks[i][(int)Mathf.Floor(j / 2)] = racks[i].GetChild((int)j).gameObject;
                 }
             }
-            Debug.Log("made rack " + i);
+
         }
         
         
@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
                 
             }
         }
-        Debug.Log("Updated dish values");
+
     }
 
     public void UpdateBudgetText()
@@ -182,7 +182,7 @@ public class UIManager : MonoBehaviour
                 tRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.2f);
             }
         }
-        Debug.Log("Updated budgets");
+
         
     }
 

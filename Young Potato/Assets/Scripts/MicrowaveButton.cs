@@ -11,7 +11,14 @@ public class MicrowaveButton : MonoBehaviour
     public float MaxCookTime;
 
     private MicrowaveDoor door;
-  
+
+
+    private void Awake()
+    {
+        door = GameObject.FindGameObjectWithTag("MicrowaveDoor").GetComponent<MicrowaveDoor>();
+
+
+    }
     void Update()
     {
         cookTime -= Time.deltaTime;
@@ -25,7 +32,7 @@ public class MicrowaveButton : MonoBehaviour
 
     public void addTime()
     {
-        if(door.isOpen)
+        if(!door.isOpen)
         {
             cookTime = MaxCookTime;
             heatingThing.enabled = true;

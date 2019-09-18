@@ -10,7 +10,7 @@ public class MicrowaveDoor : MonoBehaviour
     public float angle;
     public GameObject colliderObj;
 
-    public bool isOpen { private set; get; }
+    public bool isOpen {  set; get; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,15 +34,6 @@ public class MicrowaveDoor : MonoBehaviour
         }
         
     }
-    void Open()
-    {
-        isOpen = true;
-        
-    }
-    void Close()
-    {
-        isOpen = false;
-        
-    }
+    
 
 }
