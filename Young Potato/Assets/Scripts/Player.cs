@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private InputController inputController;
     private UIManager UIManager;
 
-    [SerializeField] public Tray[] tray { private set; get; }
+    public Tray[] tray; //{ private set; get; }
 
     [SerializeField] private float DishCost;
     [SerializeField] private float IngredientCost;
@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
 
         UIManager.UpdateIndexText();
         UIManager.DeactivateFoodInformation();
+        UIManager.UpdateDishText();
 
         Ray ScreenToWorld = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -207,7 +208,7 @@ public class Player : MonoBehaviour
 
         }
 
-        DishBudget = tray[currentlySelectedStudent].DishCost;
+        //DishBudget = tray[currentlySelectedStudent].DishCost;
     }
 
     private void handleGrabbable(Grabbable grabbable, bool mouseClickingOnObject)
@@ -294,6 +295,7 @@ public class Player : MonoBehaviour
 
         currentlyServing[positionIndex] = student;
 
+        UIManager.UpdateBudgetText();
     }
 
 

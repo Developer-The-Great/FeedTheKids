@@ -141,24 +141,28 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDishText()
     {
-        GameObject[][] tRacks = {tBills1, tBills2, tBills3};
+        GameObject[][] bRacks = {bBills1, bBills2, bBills3};
         for (int i = 0; i < 3; i++)
         {
+            for (int j = 0; j < 10; j++)
+            {
+                bRacks[i][j].GetComponent<Image>().fillAmount = 0;
+            }
             if (player.tray[i].DishCost % 1 == 0)
             {
-                for (int j = 0; j < player.tray[i].DishCost; i++)
+                for (int j = 0; j < player.tray[i].DishCost; j++)
                 {
-                    tRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                    bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                 }
             }
             else
             {
                 for (int j = 0; j < player.tray[i].DishCost-1; i++)
                 {
-                    tRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                    bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                     if (j == player.tray[i].DishCost-1)
                     {
-                        tRacks[i][j+1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                        bRacks[i][j+1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
                     }
                 }
                 
@@ -172,9 +176,10 @@ public class UIManager : MonoBehaviour
         GameObject[][] tRacks = {tBills1, tBills2, tBills3};
         for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; j < player.currentlyServing[i].StudentBudget; i++)
+            if (player.currentlyServing[i] == null) continue;
+            for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
             {
-                tRacks[i][j].GetComponent<Image>().color = new Color(255, 255, 255, 90);
+                tRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.2f);
             }
         }
         Debug.Log("Updated budgets");
