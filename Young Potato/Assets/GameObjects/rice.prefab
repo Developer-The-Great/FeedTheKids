@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &437424260189320828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447733217016639045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  food: {fileID: 0}
 --- !u!1 &1045865952755422656
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cbb93412293eb41979a79033338b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftingOffset: {x: 0, y: 0.5, z: 0}
+  liftingOffset: {x: 0.05, y: 0.5, z: 0}
   addedSeperation: 0
   foodType: 1
   BurnCoefficient: 1
@@ -124,8 +111,21 @@ MonoBehaviour:
   cutOffset: {x: 0, y: 0, z: 0}
   InContainer: 1
   isOnCuttingBoard: 0
+  IsCookedInTimeStep: 0
   initialLoc: {x: 0, y: 0, z: 0}
   costPerPiece: 0.5
+--- !u!114 &437424260189320828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447733217016639045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0125553a360ad4a850b79f12564e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7951744111632024422
 GameObject:
   m_ObjectHideFlags: 0

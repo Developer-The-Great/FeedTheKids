@@ -1,0 +1,2 @@
+The demo_hand includes the short script for the state toggles used in the example scene
+The other one does not, they are otherwise identical.

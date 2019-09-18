@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Grabber),typeof(UIManager))]
 public class Player : MonoBehaviour
 {
+    GameObject handObj;
+    Hand hand;
 
     public Grabber grabber { get; private set; }
     private StudentManager studentManager;
@@ -95,6 +97,10 @@ public class Player : MonoBehaviour
         inputController = GameManager.Manager.Input;
 
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
+
+        handObj = GameObject.FindGameObjectWithTag("hand");
+
+        hand = handObj.GetComponent<Hand>();
        
     }
 
@@ -132,6 +138,7 @@ public class Player : MonoBehaviour
             }
         }
 
+       
 
         UIManager.UpdateIndexText();
         UIManager.DeactivateFoodInformation();
@@ -148,7 +155,7 @@ public class Player : MonoBehaviour
         if (mouseHoverOnObject)
         {
             grabber.MouseWorldPosition = Hit.point;
-            
+            hand.SetHandPosition(Hit.point);
 
             GameObject HitObj = Hit.transform.root.gameObject;
             Selected = HitObj;

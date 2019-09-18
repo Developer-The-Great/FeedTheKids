@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cbb93412293eb41979a79033338b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftingOffset: {x: 0, y: 0.5, z: 0}
+  liftingOffset: {x: 0, y: 0.49, z: 0}
   addedSeperation: 0.02
   foodType: 3
   BurnCoefficient: 1

@@ -75,6 +75,7 @@ public class Grabber : MonoBehaviour
     public void holdGrabbable(float distanceMultiplier)
     {
         grabbedObject.transform.position = mouseWorldPosition + grabbedObject.liftingOffset * distanceMultiplier;
+        grabbedObject.transform.rotation = Quaternion.identity;
         grabbedObject.GetComponent<Grabbable>().stopAngularVelocity();
     }
 

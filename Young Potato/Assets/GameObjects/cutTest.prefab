@@ -176,7 +176,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1627456392638784655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cbb93412293eb41979a79033338b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftingOffset: {x: 0, y: 0.5, z: 0}
+  liftingOffset: {x: -0.1, y: 0.42, z: 0}
   addedSeperation: 0.06
   foodType: 2
   BurnCoefficient: 1

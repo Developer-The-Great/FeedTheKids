@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cbb93412293eb41979a79033338b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftingOffset: {x: 0, y: 0.5, z: 0}
+  liftingOffset: {x: -0.05, y: 0.5, z: -0.02}
   addedSeperation: 0.03
   foodType: 0
   BurnCoefficient: 1
@@ -186,6 +186,7 @@ MonoBehaviour:
   cutOffset: {x: 0.9, y: 0, z: 0}
   InContainer: 1
   isOnCuttingBoard: 0
+  IsCookedInTimeStep: 0
   initialLoc: {x: 0.375, y: 0, z: 0}
   costPerPiece: 1
 --- !u!1 &3354132066145533386
