@@ -319,12 +319,11 @@ public class Player : MonoBehaviour
 
             if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget && !isTimeChecking)
             {
+                if (Mathf.Approximately(tray[positionIndex].DishCost, 0))
+                    studentManager.starvingCount ++;
                 return;
             }
 
-            if (Mathf.Approximately(tray[positionIndex].DishCost, 0) && previousStudent.isBroke)
-                studentManager.starvingCount ++;
-            
             Vector3 exitPoint = studentManager.GetExitPosition();
 
             previousStudent.ExitPlayArea();
