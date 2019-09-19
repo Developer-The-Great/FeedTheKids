@@ -9,11 +9,9 @@ public class PickUpTutorial : Tutorial
     public Grabbable grabbedObject { get; set; }
     public Knife knife;
 
-    private bool IsGrabbing;
-
     public override void CheckIfHappening()
     {
-        if (IsGrabbing && grabbedObject == knife)
+        if (Input.GetMouseButtonUp(0))
         {
             TutorialManager.Instance.CompletedTutorial();
 
