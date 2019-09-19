@@ -13,13 +13,12 @@ public class Bubble : MonoBehaviour
         bubbleTime = pBubbleTime;
         
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(startBubble());
     }
 
-    // Update is called once per frame
     void Update()
     {
         totalDist += speed;

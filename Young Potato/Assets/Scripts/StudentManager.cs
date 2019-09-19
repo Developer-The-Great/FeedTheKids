@@ -6,7 +6,6 @@ public class StudentManager : MonoBehaviour
 {
     public GameObject[] models;
 
-
     private FoodScorer scorer;
     UIManager UIManager;
 
@@ -21,7 +20,6 @@ public class StudentManager : MonoBehaviour
     private Queue<FoodType> studentRequestQueue;
     private Queue<float> studentWaitTimeQueue;
     
-
     private float money;
 
     public float moneyEarned
@@ -59,8 +57,6 @@ public class StudentManager : MonoBehaviour
         }
     }
 
-    
-
     public float[] studentBudget
     {
         get
@@ -85,21 +81,17 @@ public class StudentManager : MonoBehaviour
     public void Next()
     {
         currentStudent++;
-
     }
 
-    public void AssignNutrition(float nutrition)
-    {
-        nutritionGiven[StudentIndex] = nutrition;
-    }
+    
 
     public bool CreateStudent(out Student student, int positionFill)
     {
         if(studentBudgetQueue.Count != 0)
         {
             student = Instantiate(studentObj, SpawnPoint.position, Quaternion.identity).GetComponent<Student>();
-            Debug.Log("student created");
-            student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime(),models[Random.Range(0,models.Length-1)]);
+
+            student.Init(getNextStudentBudget(), positionFill, this,getNextStudentRequest(), getNextStudentWaitTime(),models[Random.Range(0,models.Length-1)]);
             student.EnterPlayArea(lineTransform[positionFill].position);
             student.trayInStudent.SetActive(true);
             return true;
@@ -107,7 +99,7 @@ public class StudentManager : MonoBehaviour
         else
         {
             student = null;
-            Debug.Log("line is finished");
+ 
             return false;
         }
         

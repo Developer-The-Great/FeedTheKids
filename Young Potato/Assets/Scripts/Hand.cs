@@ -47,7 +47,7 @@ public class Hand : MonoBehaviour
     {
         if (grabber.grabbedObject is Knife knife && Input.GetMouseButton(0))
         {
-            Debug.Log("y lock");
+
             float y = knife.transform.position.y - mousePosition.y;
             float z = knife.transform.position.z - mousePosition.z;
             offset = new Vector3(offset.x, y, z-0.2f);
