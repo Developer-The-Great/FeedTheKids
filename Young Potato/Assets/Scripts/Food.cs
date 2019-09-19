@@ -13,6 +13,11 @@ public struct FoodData
 [RequireComponent(typeof(Rigidbody))]
 public class Food : Grabbable
 {
+    GameObject TrayToStickTo;
+    Vector3 stickPositionOffset;
+    public bool isStickMode;
+
+
     [SerializeField] [Range(0,1)] float addedSeperation;
     public FoodType FoodType
     {
@@ -68,6 +73,28 @@ public class Food : Grabbable
         {
             costPerPiece = value;
         }
+    }
+
+
+    public void stickToStudent()
+    {
+        if(TrayToStickTo)
+        {
+            transform.root.position = TrayToStickTo.transform.position + stickPositionOffset;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
+
+    }
+    public void SetStickValues(GameObject tray)
+    {
+        stickPositionOffset = transform.root.position - tray.transform.position;
+        rb.isKinematic = true;
+        TrayToStickTo = tray;
+        isStickMode = true;
     }
 
     public void Init(Vector3 pPositon,GameObject[] pFoodBits,Transform[] pCutLocations,
@@ -165,6 +192,15 @@ public class Food : Grabbable
         showBurntness = Burntness;
 
         coolDown();
+    }
+
+    private void LateUpdate()
+    {
+        if(isStickMode)
+        {
+            stickToStudent();
+        }
+       
     }
 
     public bool IsCutable()
@@ -286,6 +322,8 @@ public class Food : Grabbable
         }
         
     }
+
+    
 
     public float GetReadiness()
     {

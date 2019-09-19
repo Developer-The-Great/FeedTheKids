@@ -98,6 +98,7 @@ public class StudentManager : MonoBehaviour
             Debug.Log("student created");
             student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime());
             student.EnterPlayArea(lineTransform[positionFill].position);
+            student.trayInStudent.SetActive(true);
             return true;
         }
         else

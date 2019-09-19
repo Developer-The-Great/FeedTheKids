@@ -136,6 +136,17 @@ public class Player : MonoBehaviour
             {
                 fillPosition(i,true);
             }
+
+            if(currentlyServing[i].setGoal)
+            {
+                tray[i].transform.root.gameObject.SetActive(false);
+    
+            }
+            else
+            {
+                tray[i].transform.root.gameObject.SetActive(true);
+                currentlyServing[i].trayInStudent.SetActive(false);
+            }
         }
 
        
@@ -249,7 +260,7 @@ public class Player : MonoBehaviour
       
     }
 
-
+   
 
     private void LateUpdate()
     {
@@ -323,10 +334,11 @@ public class Player : MonoBehaviour
                     studentManager.starvingCount ++;
                 return;
             }
-
+            tray[positionIndex].GiveFood(previousStudent);
             Vector3 exitPoint = studentManager.GetExitPosition();
 
             previousStudent.ExitPlayArea();
+            previousStudent.trayInStudent.SetActive(true);
 
             float statisfaction =  studentManager.GetStatisfaction(previousStudent, tray[positionIndex]);
             Debug.Log("statisfaction: " + statisfaction);
@@ -336,7 +348,7 @@ public class Player : MonoBehaviour
             StatisfactionState likeness = studentManager.FindLikeness(statisfaction);
 
             StartCoroutine(UIManager.displayServed(likeness));
-            tray[positionIndex].DestroyFood();
+            
 
 
             

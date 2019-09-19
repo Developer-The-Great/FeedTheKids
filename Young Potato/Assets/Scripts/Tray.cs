@@ -24,7 +24,7 @@ public class Tray : Container
 
     private void Start()
     {
-        transform.parent = null;
+        transform.parent.parent = null;
         player.DishBudget = 0;
        
         //foodDestroyer = GetComponent<Destroyer>();
@@ -72,13 +72,13 @@ public class Tray : Container
     }
 
  
-
-    public void DestroyFood()
+    public void GiveFood(Student student)
     {
-        //foodDestroyer.DestroyFood();
-        Destroyer dest = gameObject.AddComponent<Destroyer>();
-        StartCoroutine(dest.StartDestroy());
+        foreach(Food food in foodInTray)
+        {
+            food.SetStickValues(student.trayInStudent);
+        }
     }
-
+   
 
 }

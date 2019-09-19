@@ -17,6 +17,7 @@ public enum FoodType
 [RequireComponent(typeof(CharacterController))]
 public class Student : MonoBehaviour
 {
+    public GameObject trayInStudent;
     private CharacterController characterController;
     private Vector3 worldPositionInfoLocation;
     private GameObject selectedIndicator;
@@ -46,6 +47,7 @@ public class Student : MonoBehaviour
      private float timeWaited;
 
     public bool isBroke;
+    public bool isServed;
 
     [SerializeField] private float fixedYPosition;
 
@@ -58,7 +60,7 @@ public class Student : MonoBehaviour
         MaxWaitTime = pMaxWaitTime;
 
         preferedFood = pRequest;
-
+        
         isBroke = Mathf.Approximately(pBudget, 0);
     }
 
@@ -67,10 +69,15 @@ public class Student : MonoBehaviour
         return Mathf.Clamp(timeWaited / MaxWaitTime,0,1.0f);
     }
 
+    public void Start()
+    {
+        
+    }
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        acceptableDistance = speed / 200;
+        acceptableDistance = speed / 50;
     }
 
     // Update is called once per frame
@@ -85,18 +92,22 @@ public class Student : MonoBehaviour
             FollowOrientation(target);
         }
 
-        
+        if(isServed)
+        {
+            trayInStudent.SetActive(true);
+        }
     }
 
     public void FollowOrientation(Vector3 lookAt)
     {
 
-        Quaternion targetRotation = Quaternion.LookRotation(GetYIgnoreVec(lookAt) - GetYIgnoreVec(transform.position), Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.05f);
+        Quaternion targetRotation = Quaternion.LookRotation(GetYIgnoreVec(lookAt + -Vector3.forward * 3) - GetYIgnoreVec(transform.position), Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.03f);
 
-        if(Quaternion.Angle(targetRotation,transform.rotation) < 2f)
+        if(Quaternion.Angle(targetRotation,transform.rotation) < 1f)
         {
             transform.rotation = targetRotation;
+
         }
     }
 
@@ -104,17 +115,14 @@ public class Student : MonoBehaviour
     public void Move(Vector3 direction)
     {
         characterController.SimpleMove(direction.normalized * speed);
-
-        if(Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)) < acceptableDistance)
+        Debug.Log("distance to target" + Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)));
+        if (Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)) < acceptableDistance)
         {
             setGoal = false;
-            gameObject.transform.position = GetYIgnoreVec(target);
-
-            if(Vector3.Distance(target,studentManager.lineTransform[StudentIndex].position) < 0.01f)
-            {
-
-            }
+            //trayInStudent.SetActive(false);
+          
         }
+        
         
         if(Vector3.Distance(transform.position,studentManager.GetExitPosition()) < 1)
         {
