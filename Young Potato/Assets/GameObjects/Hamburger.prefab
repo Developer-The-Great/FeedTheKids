@@ -198,7 +198,7 @@ MonoBehaviour:
   isOnCuttingBoard: 0
   IsCookedInTimeStep: 0
   initialLoc: {x: 0, y: 0, z: 0}
-  costPerPiece: 0
+  costPerPiece: 1
 --- !u!1001 &394353973857047450
 PrefabInstance:
   m_ObjectHideFlags: 0

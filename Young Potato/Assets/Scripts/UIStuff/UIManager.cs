@@ -142,6 +142,7 @@ public class UIManager : MonoBehaviour
         dislikeText.gameObject.SetActive(false);
         okText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
+        starvingText.gameObject.SetActive(false);
        
     }
 
@@ -329,6 +330,7 @@ public class UIManager : MonoBehaviour
             dislikeText.gameObject.SetActive(true);
             okText.gameObject.SetActive(true);
             moneyText.gameObject.SetActive(true);
+            starvingText.gameObject.SetActive(true);
 
 
 
