@@ -236,19 +236,11 @@ public class UIManager : MonoBehaviour
         switch (likeness)
         {
             case StatisfactionState.Dislike:
-<<<<<<< HEAD
                 tastiness.text = "The student doesn't like it !";
                 break;
             case StatisfactionState.Like:
                 tastiness.text = "The student likes it !";
-=======
-                tastiness.text = "The student disliked that!";
                 soundManager.FoodBad.Play();
-                break;
-            case StatisfactionState.Like:
-                tastiness.text = "The student liked that!";
-                soundManager.FoodGood.Play();
->>>>>>> 15f5e46500b58c989a13de2a1f1005b1133829f2
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
