@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
 
         moneyEarnedText = GameObject.FindGameObjectWithTag("moneyEarnedText").GetComponent<Text>();
         
-        starvingText = GameObject.FindGameObjectWithTag("StarvingChildrenText").GetComponent<Text>();
+        starvingText = GameObject.FindGameObjectWithTag("StarvingKidsText").GetComponent<Text>();
 
         studentIndexText = GameObject.FindGameObjectWithTag("studentIndexText").GetComponent<Text>();
 
@@ -317,7 +317,7 @@ public class UIManager : MonoBehaviour
             okText.text = "Times food was ok " + studentManager.okCount;
             starvingText.text = studentManager.starvingCount + " Starving Children";
             if( studentManager.starvingCount > 0)
-                starvingText.color = new Color();
+                starvingText.color = new Color(219.0f/255.0f, 79.0f/255.0f, 56.0f/255.0f, 1.0f);
             float whole = Mathf.Round(studentManager.moneyEarned);
             float deci = Mathf.Round((studentManager.moneyEarned - whole)*100)/100;
             float earned = whole + deci;
