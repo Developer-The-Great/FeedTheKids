@@ -7474,7 +7474,7 @@ PrefabInstance:
     - target: {fileID: 2613805717940461806, guid: bf785f5c1ed10264fb58007c85380148,
         type: 3}
       propertyPath: costPerPiece
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2613805717940461806, guid: bf785f5c1ed10264fb58007c85380148,
         type: 3}
@@ -10828,7 +10828,7 @@ GameObject:
   - component: {fileID: 1234248790}
   - component: {fileID: 1234248791}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Handblocker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15859,6 +15859,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1415320734}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1784286123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784286125}
+  - component: {fileID: 1784286124}
+  m_Layer: 0
+  m_Name: Handblocker2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1784286124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784286123}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.51689, y: 3.6117918, z: 1}
+  m_Center: {x: -1.6563599, y: 1.3058959, z: 0}
+--- !u!4 &1784286125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784286123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.57, y: 1.858, z: -8.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1795084259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2505872170186169158, guid: 570a0a0df37851a49a13d5463f2e7809,
@@ -17573,6 +17617,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1646501001078765265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1994138771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994138770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f46c690baa0c3e49a98e5367c3e1891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnifeLookatPosition: {fileID: 895054816}
+  angleX: -10
+--- !u!114 &1994138772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994138770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90ea69be73760c419cc111bc6af0fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeZoom: 0
 --- !u!65 &1994138773 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 8894499100324907933, guid: 9c161776558b49c469d8823e7524a173,
@@ -17585,6 +17656,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1646501001078765265}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1994138775
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994138770}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!114 &1994138776
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -59,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/UIStuff/UIManager.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="83">
@@ -113,6 +113,23 @@
                 <marker date="1568935717979" expanded="true" signature="15685:15735" ph="{...}" />
                 <marker date="1568935717979" expanded="true" signature="15759:15809" ph="{...}" />
                 <marker date="1568935717979" expanded="true" signature="15842:16073" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              <folding>
+                <marker date="1568935961633" expanded="false" signature="6:78" ph="..." />
+                <marker date="1568935961633" expanded="true" signature="106:150" ph="{...}" />
+                <marker date="1568935961633" expanded="true" signature="229:1632" ph="{...}" />
+                <marker date="1568935961633" expanded="true" signature="536:846" ph="{...}" />
+                <marker date="1568935961633" expanded="true" signature="910:1625" ph="{...}" />
+                <marker date="1568935961633" expanded="true" signature="942:1618" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -344,6 +361,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UIStuff/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tray.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MicrowaveButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sounds/SoundManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StudentManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
@@ -429,12 +447,12 @@
       <workItem from="1568821526429" duration="239000" />
       <workItem from="1568846559831" duration="1088000" />
       <workItem from="1568880887955" duration="20010000" />
-      <workItem from="1568929539752" duration="6364000" />
+      <workItem from="1568929539752" duration="7199000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53076000" />
+    <option name="totallyTimeSpent" value="53911000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -789,6 +807,21 @@
             <marker date="1568935717979" expanded="true" signature="15685:15735" ph="{...}" />
             <marker date="1568935717979" expanded="true" signature="15759:15809" ph="{...}" />
             <marker date="1568935717979" expanded="true" signature="15842:16073" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <marker date="1568935961633" expanded="false" signature="6:78" ph="..." />
+            <marker date="1568935961633" expanded="true" signature="106:150" ph="{...}" />
+            <marker date="1568935961633" expanded="true" signature="229:1632" ph="{...}" />
+            <marker date="1568935961633" expanded="true" signature="536:846" ph="{...}" />
+            <marker date="1568935961633" expanded="true" signature="910:1625" ph="{...}" />
+            <marker date="1568935961633" expanded="true" signature="942:1618" ph="{...}" />
           </folding>
         </state>
       </provider>
