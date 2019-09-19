@@ -54,6 +54,10 @@ public class UIManager : MonoBehaviour
 
     private GameObject earnings;
     private GameObject buttons;
+
+    private bool checkedWin = false;
+    public GameObject star;
+    public Transform starSpot;
    
 
     private void Awake()
@@ -181,7 +185,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    for (int j = 0; j < player.tray[i].DishCost - 1; i++)
+                    for (int j = 0; j < player.tray[i].DishCost - 1; j++)
                     {
                         bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                         if (j == player.tray[i].DishCost - 1)
@@ -312,8 +316,9 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (studentManager.CheckWin())
+        if (studentManager.CheckWin() && !checkedWin)
         {
+            checkedWin = true;
             ingredientText.gameObject.SetActive(false);
             bManager.gameObject.SetActive(false);
             earnings.gameObject.SetActive(false);
@@ -345,9 +350,25 @@ public class UIManager : MonoBehaviour
             moneyText.gameObject.SetActive(true);
             starvingText.gameObject.SetActive(true);
 
-
-
-
+            int stars = 0;
+            if (earned >= 5.0f)
+                stars++;
+            if (earned >= 10.0f)
+                stars++;
+            if (earned >= 15.0f)
+                stars++;
+            if (studentManager.dislikeCount <= 2)
+                stars++;
+            if (studentManager.likeCount >= 4)
+                stars++;
+            if (studentManager.starvingCount == 0)
+                stars++;
+            switch (stars)
+            {
+                case 1:
+                    GameObject star1 = Instantiate(star, starSpot);
+                    break;
+            }
         }
 
     }

@@ -35,7 +35,7 @@ public class FoodScorer : MonoBehaviour
     {
 
         
-        float multiplier = 1.01f;
+        float multiplier = 1.0001f;
         
 
         if(student.isBroke)

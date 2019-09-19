@@ -319,11 +319,12 @@ public class Player : MonoBehaviour
 
             if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget && !isTimeChecking)
             {
-                if (Mathf.Approximately(tray[positionIndex].DishCost, 0))
-                    studentManager.starvingCount ++;
                 return;
             }
 
+            if (Mathf.Approximately(tray[positionIndex].DishCost, 0) && previousStudent.isBroke)
+                studentManager.starvingCount ++;
+            
             Vector3 exitPoint = studentManager.GetExitPosition();
 
             previousStudent.ExitPlayArea();
@@ -331,7 +332,11 @@ public class Player : MonoBehaviour
             float statisfaction =  studentManager.GetStatisfaction(previousStudent, tray[positionIndex]);
             Debug.Log("statisfaction: " + statisfaction);
             Debug.Log("tray[positionIndex]: " + tray[positionIndex].DishCost);
-            studentManager.AddMoneyEarned(statisfaction, tray[positionIndex].DishCost);
+            if (previousStudent.isBroke)
+                studentManager.AddMoneyEarned(-statisfaction, tray[positionIndex].DishCost);
+            else
+                studentManager.AddMoneyEarned(statisfaction, tray[positionIndex].DishCost);
+            
 
             StatisfactionState likeness = studentManager.FindLikeness(statisfaction);
 
