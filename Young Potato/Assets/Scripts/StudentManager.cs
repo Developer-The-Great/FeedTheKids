@@ -90,20 +90,21 @@ public class StudentManager : MonoBehaviour
         nutritionGiven[StudentIndex] = nutrition;
     }
 
-    public void CreateStudent(out Student student, int positionFill)
+    public bool CreateStudent(out Student student, int positionFill)
     {
         if(studentBudgetQueue.Count != 0)
         {
             student = Instantiate(studentObj, SpawnPoint.position, Quaternion.identity).GetComponent<Student>();
-
+            Debug.Log("student created");
             student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime());
             student.EnterPlayArea(lineTransform[positionFill].position);
+            return true;
         }
         else
         {
             student = null;
-
-
+            Debug.Log("line is finished");
+            return false;
         }
         
     }
