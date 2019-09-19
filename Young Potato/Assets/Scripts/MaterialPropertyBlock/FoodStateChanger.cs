@@ -15,7 +15,6 @@ public class FoodStateChanger : MonoBehaviour
     Food food;
 
     // Start is called before the first frame update
-
     private void Awake()
     {
        
