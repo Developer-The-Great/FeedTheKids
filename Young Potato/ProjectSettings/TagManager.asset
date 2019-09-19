@@ -36,6 +36,7 @@ TagManager:
   - hand
   - Earnings
   - Buttons
+  - StarvingKidsText
   layers:
   - Default
   - TransparentFX
