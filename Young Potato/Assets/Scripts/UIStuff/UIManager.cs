@@ -316,6 +316,8 @@ public class UIManager : MonoBehaviour
             dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
             okText.text = "Times food was ok " + studentManager.okCount;
             starvingText.text = studentManager.starvingCount + " Starving Children";
+            if( studentManager.starvingCount > 0)
+                starvingText.color = new Color();
             float whole = Mathf.Round(studentManager.moneyEarned);
             float deci = Mathf.Round((studentManager.moneyEarned - whole)*100)/100;
             float earned = whole + deci;
