@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
 
-
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
 
     }
 
