@@ -323,8 +323,6 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            
-
             Vector3 exitPoint = studentManager.GetExitPosition();
 
             previousStudent.ExitPlayArea();
