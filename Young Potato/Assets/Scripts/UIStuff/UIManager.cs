@@ -309,10 +309,13 @@ public class UIManager : MonoBehaviour
             moneyEarnedText.gameObject.SetActive(false);
 
 
-            likedText.text = "Times food was liked: " + studentManager.likeCount;
-            dislikeText.text = "Times food was disliked: " + studentManager.dislikeCount;
-            okText.text = "Times food was ok: " + studentManager.okCount;
-            moneyText.text = "Money Earned: $" + studentManager.moneyEarned;
+            likedText.text = "Times food was liked " + studentManager.likeCount;
+            dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
+            okText.text = "Times food was ok " + studentManager.okCount;
+            float whole = Mathf.Round(studentManager.moneyEarned);
+            float deci = Mathf.Round((studentManager.moneyEarned - whole)*100)/100;
+            float earned = whole + deci;
+            moneyText.text = "Money Earned $" + earned;
 
             endScreen.gameObject.SetActive(true);
             finishText.gameObject.SetActive(true);
