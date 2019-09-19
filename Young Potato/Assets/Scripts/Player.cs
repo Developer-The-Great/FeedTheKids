@@ -341,7 +341,7 @@ public class Player : MonoBehaviour
             StatisfactionState likeness = studentManager.FindLikeness(statisfaction);
 
             StartCoroutine(UIManager.displayServed(likeness));
-            tray[positionIndex].DestroyFood();
+            tray[positionIndex].GiveFood(previousStudent) ;
 
 
             
