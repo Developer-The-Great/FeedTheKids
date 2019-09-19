@@ -40,6 +40,8 @@ TagManager:
   - Star
   - TranStar
   - SoundManager
+  - BillHolder
+  - DetailToggle
   layers:
   - Default
   - TransparentFX

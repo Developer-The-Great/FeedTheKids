@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     private Text studentIndexText;
     private Text moneyEarnedText;
     private Text starvingText;
-    private Text requestText;
+    private Image[] requests = new Image[3];
 
 
     private Text finishText;
@@ -63,6 +63,13 @@ public class UIManager : MonoBehaviour
 
     private GameObject[] spots = new GameObject[5];
 
+    private Transform[] billHolders = new Transform[3];
+
+    public Sprite[] images = new Sprite[5];
+    private GameObject bobble;
+
+    private GameObject detailToggle;
+    
     private void Awake()
     {
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
@@ -94,7 +101,7 @@ public class UIManager : MonoBehaviour
         
         starvingText = GameObject.FindGameObjectWithTag("StarvingKidsText").GetComponent<Text>();
 
-        ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
+//        ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
 
         served = GameObject.FindGameObjectWithTag("servingText").GetComponent<Text>();
 
@@ -129,13 +136,26 @@ public class UIManager : MonoBehaviour
         dislikeText = GameObject.Find("dislikeText").GetComponent<Text>();
         okText = GameObject.Find("okText").GetComponent<Text>();
         moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
-        requestText = GameObject.Find("request").GetComponent<Text>();
+        
+        bobble = GameObject.Find("Bobbles");
+        for (int i = 0; i < 3; i++)
+        {
+            requests[i] = bobble.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Image>();
+        }
 
         earnings = GameObject.FindGameObjectWithTag("Earnings");
         buttons = GameObject.FindGameObjectWithTag("Buttons");
 
         stars = GameObject.FindGameObjectsWithTag("Star");
         spots = GameObject.FindGameObjectsWithTag("TranStar");
+
+        Transform billHolder = GameObject.FindGameObjectWithTag("BillHolder").transform;
+        for (int i = 0; i < 3; i++)
+        {
+            billHolders[i] = billHolder.GetChild(i);
+        }
+
+        detailToggle = GameObject.FindGameObjectWithTag("DetailToggle");
     }
 
     private void Start()
@@ -151,12 +171,13 @@ public class UIManager : MonoBehaviour
         okText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
         starvingText.gameObject.SetActive(false);
+        detailToggle.SetActive(false);
        
     }
 
     public void UpdateIngredientText()
     {
-        ingredientText.text = "Ingredient Cost: " + player.IngredientBudget;
+//        ingredientText.text = "Ingredient Cost: " + player.IngredientBudget;
     }
 
     public void UpdateDishText()
@@ -270,26 +291,29 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRequestText(FoodType foodType)
     {
-        switch(foodType)
+        for (int i = 0; i < 3; i++)
         {
-            case FoodType.Apple:
-                requestText.text = "Student Request: Apple" ;
-                break;
-            case FoodType.Chicken:
-                requestText.text = "Student Request: Chicken";
-                break;
-            case FoodType.Potato:
-                requestText.text = "Student Request: Potato";
-                break;
-            case FoodType.Rice:
-                requestText.text = "Student Request: Rice";
-                break;
-            case FoodType.None:
-                requestText.text = "Student Request: None";
-                break;
+            foodType = player.currentlyServing[i].preferedFood;
+            switch (foodType)
+            {
+                case FoodType.Apple:
+                    requests[i].sprite = images[0];
+                    break;
+                case FoodType.Chicken:
+                    requests[i].sprite  = images[1];
+                    break;
+                case FoodType.Potato:
+                    requests[i].sprite  = images[2];
+                    break;
+                case FoodType.Rice:
+                    requests[i].sprite  = images[3];
+                    break;
+                case FoodType.None:
+                    requests[i].sprite  = images[4];
+                    break;
 
+            }
         }
-        
 
 
 
@@ -336,10 +360,14 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            racks[i].position = Camera.main.WorldToScreenPoint(billHolders[i].position);
+        }
+        
         if (studentManager.CheckWin() && !checkedWin)
         {
             checkedWin = true;
-            ingredientText.gameObject.SetActive(false);
             bManager.gameObject.SetActive(false);
             earnings.gameObject.SetActive(false);
             buttons.gameObject.SetActive(false);
@@ -349,6 +377,7 @@ public class UIManager : MonoBehaviour
             cost.gameObject.SetActive(false);
             moneyEarnedText.gameObject.SetActive(false);
             DeactivateFoodInformation();
+            bobble.SetActive(false);
 
             likedText.text = "Times food was liked " + studentManager.likeCount;
             dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
@@ -363,9 +392,7 @@ public class UIManager : MonoBehaviour
 
             endScreen.gameObject.SetActive(true);
             finishText.gameObject.SetActive(true);
-            likedText.gameObject.SetActive(true);
-            dislikeText.gameObject.SetActive(true);
-            okText.gameObject.SetActive(true);
+            detailToggle.SetActive(true);
             moneyText.gameObject.SetActive(true);
             starvingText.gameObject.SetActive(true);
 
@@ -409,6 +436,14 @@ public class UIManager : MonoBehaviour
         tastiness.gameObject.SetActive(false);
     }
 
+    public void toggleStudentUI(int studentPosition)
+    {
+        bool stateToSet = !racks[studentPosition].gameObject.activeInHierarchy;
+        racks[studentPosition].gameObject.SetActive(stateToSet);
+        bobble.transform.GetChild(studentPosition).gameObject.SetActive(stateToSet);
+        buttons.transform.GetChild(studentPosition).gameObject.SetActive(stateToSet);
+    }
+
     public void next1()
     {
         player.fillPosition(0,false);
@@ -420,5 +455,13 @@ public class UIManager : MonoBehaviour
     public void next3()
     {
         player.fillPosition(2,false);
+    }
+
+    public void toggleDetails()
+    {
+        bool stateToSet = !okText.gameObject.activeInHierarchy;
+        okText.gameObject.SetActive(stateToSet);
+        likedText.gameObject.SetActive(stateToSet);
+        dislikeText.gameObject.SetActive(stateToSet);
     }
 }
