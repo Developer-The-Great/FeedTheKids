@@ -23,8 +23,7 @@ public class StudentManager : MonoBehaviour
     private Queue<float> studentBudgetQueue;
     private Queue<FoodType> studentRequestQueue;
     private Queue<float> studentWaitTimeQueue;
-    private Queue<int> positionToFill;
-    private Queue<int> fillStartIndexQueue;
+    
 
     private float money;
 
@@ -83,7 +82,7 @@ public class StudentManager : MonoBehaviour
     public int dislikeCount;
     public int starvingCount;
 
-    public int[] studentIndexStart;
+   
 
 
     public void Next()
@@ -123,10 +122,7 @@ public class StudentManager : MonoBehaviour
         studentBudgetQueue = new Queue<float>();
         studentRequestQueue = new Queue<FoodType>();
         studentWaitTimeQueue = new Queue<float>();
-        positionToFill = new Queue<int>();
 
-        positionToFill.Enqueue(0);
-        positionToFill.Enqueue(2);
 
         nutritionGiven = new float[studentBudgets.Length];
 
@@ -136,11 +132,7 @@ public class StudentManager : MonoBehaviour
            
         }
 
-        for (int i = 0; i < studentIndexStart.Length; i++)
-        {
-            studentBudgetQueue.Enqueue(studentBudget[i]);
-
-        }
+       
 
 
         for (int i = 0; i < studentBudgets.Length; i++)
@@ -192,6 +184,7 @@ public class StudentManager : MonoBehaviour
     public void DestroyStudent(Student student)
     {
         StudentsServed++;
+        OnStudentDestroy(StudentsServed);
         Destroy(student.gameObject);
     }
 

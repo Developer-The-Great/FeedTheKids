@@ -80,6 +80,13 @@ public class Player : MonoBehaviour
 
     public bool CutMode;
 
+    private Queue<int> positionToFillQueue;
+    private Queue<int> fillStartIndexQueue;
+
+    public int[] fillStartIndex;
+    public int[] positionToFill;
+    public int firstPosition;
+
     private void Awake()
     {
 
@@ -96,6 +103,25 @@ public class Player : MonoBehaviour
         hand = handObj.GetComponent<Hand>();
 
         CamRotator = GetComponentInChildren<CameraRotator>();
+
+        studentManager.OnStudentDestroy += checkIfCanFillPosition;
+    }
+
+    void checkIfCanFillPosition(int studentServed)
+    {
+        if(fillStartIndexQueue.Count != 0)
+        {
+            if(studentServed == fillStartIndexQueue.Peek())
+            {
+                fillStartIndexQueue.Dequeue();
+
+                if(positionToFillQueue.Count != 0)
+                {
+                    fillPosition(positionToFillQueue.Dequeue(), false);
+                }
+
+            }
+        }
     }
 
     void Start()
@@ -106,9 +132,9 @@ public class Player : MonoBehaviour
 
         Debug.Log("intialize player");
 
-        fillPosition(0,false);
-        fillPosition(1, false);
-        fillPosition(2, false);
+        //fillPosition(0,false);
+        fillPosition(firstPosition, false);
+        //fillPosition(2, false);
 
         StudentBudget = studentManager.studentBudget[0];
         UIManager.UpdateBudgetText();
@@ -118,6 +144,20 @@ public class Player : MonoBehaviour
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
 
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
+        positionToFillQueue = new Queue<int>();
+        fillStartIndexQueue = new Queue<int>();
+
+
+        for (int i = 0; i < positionToFill.Length; i++)
+        {
+            positionToFillQueue.Enqueue(positionToFill[i]);
+        }
+
+        for (int i = 0; i < fillStartIndex.Length; i++)
+        {
+            fillStartIndexQueue.Enqueue(fillStartIndex[i]);
+        }
 
     }
 
