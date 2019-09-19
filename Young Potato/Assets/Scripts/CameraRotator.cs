@@ -12,7 +12,7 @@ public enum CameraPosition
 [RequireComponent(typeof(Camera))]
 public class CameraRotator : MonoBehaviour
 {
-
+    CameraZoomer zoomer;
     private Quaternion defaultRotation;
     private Quaternion OtherRotation;
     private Quaternion knifeLookAtRotation;
@@ -30,6 +30,8 @@ public class CameraRotator : MonoBehaviour
         OtherRotation = defaultRotation * Quaternion.AngleAxis(angleX, Vector3.right);
 
         knifeLookAtRotation = Quaternion.LookRotation(KnifeLookatPosition.position - transform.position);
+
+        zoomer = GetComponent<CameraZoomer>();
         
     }
 
@@ -38,12 +40,15 @@ public class CameraRotator : MonoBehaviour
         switch (position)
         {
             case CameraPosition.ToChildren:
+                zoomer.SetZoom(ZoomMode.Default);
                 transform.rotation = Quaternion.Slerp(transform.rotation,OtherRotation,0.05f);
                 break;
             case CameraPosition.ToFood:
+                zoomer.SetZoom(ZoomMode.Default);
                 transform.rotation = Quaternion.Slerp(transform.rotation, defaultRotation, 0.05f);
                 break;
             case CameraPosition.ToKnife:
+                zoomer.SetZoom(ZoomMode.KnifeZoom);
                 transform.rotation = Quaternion.Slerp(transform.rotation, knifeLookAtRotation, 0.05f);
                 break;
             
