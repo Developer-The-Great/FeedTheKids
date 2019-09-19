@@ -6847,7 +6847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f46c690baa0c3e49a98e5367c3e1891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnifeLookatPosition: {fileID: 0}
+  KnifeLookatPosition: {fileID: 895054816}
   angleX: -10
 --- !u!114 &712385476
 MonoBehaviour:
