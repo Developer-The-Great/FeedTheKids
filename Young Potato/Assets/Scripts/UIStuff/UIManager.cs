@@ -229,10 +229,10 @@ public class UIManager : MonoBehaviour
         switch (likeness)
         {
             case StatisfactionState.Dislike:
-                tastiness.text = "The student disliked that!";
+                tastiness.text = "The student doesn't like it !";
                 break;
             case StatisfactionState.Like:
-                tastiness.text = "The student liked that!";
+                tastiness.text = "The student likes it !";
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
