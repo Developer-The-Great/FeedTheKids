@@ -62,6 +62,7 @@ public class Food : Grabbable
 
 
     public Vector3 initialLoc;
+    [SerializeField] private SoundManager soundManager;
 
     [SerializeField]private float costPerPiece;
 
@@ -179,10 +180,14 @@ public class Food : Grabbable
   
     }
 
+    public GameObject test;
+
     private void Awake()
     {
+        test = GameObject.FindGameObjectWithTag("SoundManager");
         InContainer = true;
         Coldness = 1;
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     void Start()
@@ -222,12 +227,38 @@ public class Food : Grabbable
         IsCookedInTimeStep = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "frying")
+        {
+            soundManager.Sizzling.Play();
+        }
+
+        if (other.tag == "boiling")
+        {
+            soundManager.WaterBoiling.Play();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "frying")
+        {
+            soundManager.Sizzling.Stop();
+        }
+
+        if (other.tag == "boiling")
+        {
+            soundManager.WaterBoiling.Stop();
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "frying")
         {
             fry();
         }
+
         else if(other.tag == "boiling")
         {
             boil();
@@ -275,6 +306,7 @@ public class Food : Grabbable
 
                 if (collision.contactCount >= 2)
                 {
+                    soundManager.Cutting.Play();
                     contactPoint = Vector3.Lerp(collision.GetContact(0).point, collision.GetContact(1).point, 0.5f);
                 }
                 
@@ -356,7 +388,7 @@ public class Food : Grabbable
     {
         if(IsCookedInTimeStep)
         {
-            
+
             return;
         }
         

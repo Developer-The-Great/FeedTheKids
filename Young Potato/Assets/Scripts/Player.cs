@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private StudentManager studentManager;
     private InputController inputController;
     private UIManager UIManager;
+    private SoundManager soundManager;
 
     public Tray[] tray; //{ private set; get; }
 
@@ -129,6 +130,10 @@ public class Player : MonoBehaviour
 
         UIManager.UpdateRequestText(currentType);
 
+        studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
+
+
+
     }
 
     private void Update()
@@ -214,6 +219,7 @@ public class Player : MonoBehaviour
                 {
                    
                     door.isOpen = !door.isOpen;
+                    soundManager.MicrowaveDoor.Play();
                 }
             }
             else if (button)

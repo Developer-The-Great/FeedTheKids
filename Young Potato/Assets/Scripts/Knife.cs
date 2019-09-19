@@ -10,6 +10,7 @@ public class Knife : Grabbable
     public float acceptableDist = 0.01f;
     public BoxCollider knifePart;
     private Food food;
+   private SoundManager soundManager; 
 
     private Vector3 initialLimitingOffset;
 
@@ -68,6 +69,7 @@ public class Knife : Grabbable
     {
         if (player.grabber.grabbedObject != null)
         {
+            soundManager.Knife.Play();
             return player.grabber.grabbedObject.GetComponent<Knife>();
         }
         else
@@ -100,7 +102,7 @@ public class Knife : Grabbable
             knifePositions.Enqueue(transform.position + liftingOffset);
         }
 
-       
+
 
     }
 

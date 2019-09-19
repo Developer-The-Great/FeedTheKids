@@ -16,7 +16,7 @@ public class Grabber : MonoBehaviour
     private Vector3 mouseWorldPosition;
 
     public Grabbable grabbedObject { get; private set; }
-
+    private SoundManager soundManager;
 
     public bool IsGrabbing;
 
@@ -37,7 +37,9 @@ public class Grabber : MonoBehaviour
     private void Awake()
     {
         inputController = GameManager.Manager.Input;
-        
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
+
     }
 
     // Start is called before the first frame update
@@ -57,6 +59,11 @@ public class Grabber : MonoBehaviour
 
         grabbedObject = grab;
         IsGrabbing = true;
+
+        if ( IsGrabbing == true && grabbedObject is Knife knife )
+        {
+            soundManager.Knife.Play();
+        }
     }
 
     public void stopGrabbing()
@@ -68,6 +75,12 @@ public class Grabber : MonoBehaviour
         grabbedObject.SetRayCastInvisibility(false);
         grabbedObject = null;
         IsGrabbing = false;
+        
+        if (IsGrabbing == false)
+        {
+            soundManager.DropItem.Play();
+        }
+        
 
         
     }
