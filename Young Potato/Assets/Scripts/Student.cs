@@ -82,10 +82,24 @@ public class Student : MonoBehaviour
         {
             Vector3 direction = target - gameObject.transform.position;
             Move(GetYIgnoreVec(direction));
+            FollowOrientation(target);
+        }
+
+        
+    }
+
+    public void FollowOrientation(Vector3 lookAt)
+    {
+
+        Quaternion targetRotation = Quaternion.LookRotation(GetYIgnoreVec(lookAt) - GetYIgnoreVec(transform.position), Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.05f);
+
+        if(Quaternion.Angle(targetRotation,transform.rotation) < 2f)
+        {
+            transform.rotation = targetRotation;
         }
     }
 
-   
 
     public void Move(Vector3 direction)
     {
