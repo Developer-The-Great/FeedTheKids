@@ -22,7 +22,7 @@ public class Student : MonoBehaviour
     private Vector3 worldPositionInfoLocation;
     private GameObject selectedIndicator;
     private StudentManager studentManager;
-
+    private SoundManager soundManager;
     
     [SerializeField]private float statisfaction;
 
@@ -30,6 +30,8 @@ public class Student : MonoBehaviour
     [SerializeField]private Vector3 target;
 
     public bool setGoal;
+
+    private bool hasComplained;
 
     private float acceptableDistance;
 
@@ -78,6 +80,8 @@ public class Student : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         acceptableDistance = speed / 50;
+
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -95,6 +99,7 @@ public class Student : MonoBehaviour
         if(isServed)
         {
             trayInStudent.SetActive(true);
+            soundManager.CashRegister.Play();
         }
     }
 
@@ -161,11 +166,22 @@ public class Student : MonoBehaviour
     {
         timeWaited += Time.deltaTime;
 
+  
+        if ( timeWaited >= 0.5f * MaxWaitTime && !hasComplained )
+        {
+            hasComplained = true;
+            soundManager.Waiting.Play();
+
+        }
         if(timeWaited > MaxWaitTime)
         {
             IsTiredOfWaiting = true;
             timeWaited = MaxWaitTime;
+
+            soundManager.Footsteps.Play();
         }
+
+
     }
 
   
