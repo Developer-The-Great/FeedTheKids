@@ -188,7 +188,7 @@ MonoBehaviour:
   isOnCuttingBoard: 0
   IsCookedInTimeStep: 0
   initialLoc: {x: 0.02, y: 0, z: 0}
-  costPerPiece: 0.5
+  costPerPiece: 0.25
 --- !u!1 &2713552731815791231
 GameObject:
   m_ObjectHideFlags: 0

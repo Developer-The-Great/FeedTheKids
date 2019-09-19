@@ -87,26 +87,29 @@ public class FoodScorer : MonoBehaviour
                 fullyCookedCount++;
             }
 
-            if(food.Coldness > 0.5f)
+            if (food.FoodType != FoodType.Apple)
             {
-                halfColdCount++;
-            }
-
-            if (food.Coldness > 0.7f)
-            {
-                halfColdCount++;
-                if (food.Coldness > 0.95f)
+                if (food.Coldness > 0.5f)
                 {
-                    freezingFood = true;
+                    halfColdCount++;
+                }
+
+                if (food.Coldness > 0.7f)
+                {
+                    halfColdCount++;
+                    if (food.Coldness > 0.95f)
+                    {
+                        freezingFood = true;
+                    }
+                }
+
+
+
+                if (food.GetReadiness() < 0.5F)
+                {
+                    rawFood = true;
                 }
             }
-
-
-            if(food.GetReadiness() < 0.5F)
-            {
-                rawFood = true;
-            }
-
         }
         Debug.Log("scoring begins");
         //do multiplier addition
