@@ -159,25 +159,38 @@ public class UIManager : MonoBehaviour
             for (int j = 0; j < 10; j++)
             {
                 bRacks[i][j].GetComponent<Image>().fillAmount = 0;
+                bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
-            if (player.tray[i].DishCost % 1 == 0)
+            if (player.currentlyServing[i] == null) continue;
+            if (player.tray[i].DishCost > 10 || player.tray[i].DishCost > player.currentlyServing[i].StudentBudget)
             {
-                for (int j = 0; j < player.tray[i].DishCost; j++)
+                for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
                 {
                     bRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                    bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 0, 0, 1.0f);
                 }
             }
             else
             {
-                for (int j = 0; j < player.tray[i].DishCost-1; i++)
+                if (player.tray[i].DishCost % 1 == 0)
                 {
-                    bRacks[i][j].GetComponent<Image>().fillAmount = 1;
-                    if (j == player.tray[i].DishCost-1)
+                    for (int j = 0; j < player.tray[i].DishCost; j++)
                     {
-                        bRacks[i][j+1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                        bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                     }
                 }
-                
+                else
+                {
+                    for (int j = 0; j < player.tray[i].DishCost - 1; i++)
+                    {
+                        bRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                        if (j == player.tray[i].DishCost - 1)
+                        {
+                            bRacks[i][j + 1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                        }
+                    }
+
+                }
             }
         }
 
