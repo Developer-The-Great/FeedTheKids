@@ -25,6 +25,11 @@ public class StudentStateChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(!transform.root.GetComponent<Student>())
+        {
+            return;
+        }
         angeryness = student.GetWaitPercentage();
 
 
