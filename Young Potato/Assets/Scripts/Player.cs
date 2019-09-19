@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
     {
         for(int i =0; i < currentlyServing.Length;i++)
         {
-            if(currentlyServing[i] == null) { return; }
+            if(currentlyServing[i] == null) { continue; }
 
             if(currentlyServing[i].IsTiredOfWaiting)
             {
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 
        
 
-        UIManager.UpdateIndexText();
+        //UIManager.UpdateIndexText();
         UIManager.DeactivateFoodInformation();
         UIManager.UpdateDishText();
 
@@ -344,9 +344,14 @@ public class Player : MonoBehaviour
 
         Student student;
 
-        studentManager.CreateStudent(out student, positionIndex);
-
-        currentlyServing[positionIndex] = student;
+        if(studentManager.CreateStudent(out student, positionIndex))
+        {
+            currentlyServing[positionIndex] = student;
+        }
+        else
+        {
+            currentlyServing[positionIndex] = null;
+        }
 
         UIManager.UpdateBudgetText();
     }
