@@ -71,6 +71,8 @@ public class UIManager : MonoBehaviour
     public GameObject bobble;
 
     private GameObject detailToggle;
+
+    [SerializeField] private Texture2D cursor;
     
     private void Awake()
     {
@@ -178,6 +180,8 @@ public class UIManager : MonoBehaviour
         moneyText.gameObject.SetActive(false);
         starvingText.gameObject.SetActive(false);
         detailToggle.SetActive(false);
+        
+        Cursor.SetCursor(cursor, new Vector2(4.0f,0), CursorMode.Auto);
        
     }
 
@@ -299,6 +303,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            if (player.currentlyServing[i] == null) continue;
             FoodType foodType = player.currentlyServing[i].preferedFood;
             switch (foodType)
             {
