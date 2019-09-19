@@ -16,7 +16,8 @@ public class StudentManager : MonoBehaviour
 
     private Queue<float> studentBudgetQueue;
     private Queue<FoodType> studentRequestQueue;
-    private Queue<float> studentWaitTimeQueue; 
+    private Queue<float> studentWaitTimeQueue;
+    
 
     private float money;
 
@@ -75,6 +76,7 @@ public class StudentManager : MonoBehaviour
     public int okCount;
     public int likeCount;
     public int dislikeCount;
+    public int starvingCount;
 
 
     public void Next()

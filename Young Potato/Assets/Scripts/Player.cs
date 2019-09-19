@@ -319,7 +319,8 @@ public class Player : MonoBehaviour
 
             if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget && !isTimeChecking)
             {
-
+                if (Mathf.Approximately(tray[positionIndex].DishCost, 0))
+                    studentManager.starvingCount ++;
                 return;
             }
 
