@@ -154,6 +154,8 @@ public class Player : MonoBehaviour
 
         if (mouseHoverOnObject)
         {
+            hand.DisableAll();
+
             grabber.MouseWorldPosition = Hit.point;
             hand.SetHandPosition(Hit.point);
 
@@ -210,6 +212,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+       
 
         if (Input.GetMouseButtonUp(0) && grabber.IsGrabbing)
         {
@@ -220,6 +223,15 @@ public class Player : MonoBehaviour
         if (grabber.IsGrabbing)
         {
             grabber.holdGrabbable(distanceMultiplier);
+            if (grabber.grabbedObject is Food)
+            {
+                hand.SetGrabbingFood();
+            }
+            else if (grabber.grabbedObject is Knife)
+            {
+                hand.SetGrabbingKnife();
+            }
+
 
         }
 
@@ -252,6 +264,7 @@ public class Player : MonoBehaviour
 
     private void handleGrabbable(Grabbable grabbable, bool mouseClickingOnObject)
     {
+        hand.SetHovering(grabber.MouseWorldPosition);
         bool NotCurrentlyGrabbing = !grabber.IsGrabbing;
 
         if (grabbable is Food food)
@@ -260,6 +273,7 @@ public class Player : MonoBehaviour
 
             if (NotCurrentlyGrabbing && mouseClickingOnObject)
             {
+                
                 decreaseBudget(food);
                 grabber.grabGrabbable(food);
             }
