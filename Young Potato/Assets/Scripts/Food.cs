@@ -17,7 +17,6 @@ public class Food : Grabbable
     Vector3 stickPositionOffset;
     public bool isStickMode;
 
-
     [SerializeField] [Range(0,1)] float addedSeperation;
     public FoodType FoodType
     {
@@ -372,6 +371,7 @@ public class Food : Grabbable
         {
             readiness = Boildness;
         }
+        
         return readiness;
     }
 
@@ -408,7 +408,8 @@ public class Food : Grabbable
         heatUp();
 
         if (Boildness > 1.0f)
-        {
+        {   
+         
             Burntness += add * Time.deltaTime;
             heatUp();
             IsCookedInTimeStep = true;

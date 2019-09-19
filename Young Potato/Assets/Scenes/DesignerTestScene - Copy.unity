@@ -5424,6 +5424,36 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3849431626929743069, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 694aac30dee936a48853d357ce9e9057, type: 3}
+    - target: {fileID: 3849431626929743069, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: Priority
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431626929743069, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.595
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431625442554152, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3df6686380b89840a7ffbdf7365907e, type: 3}
+    - target: {fileID: 3849431625442554152, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431626517967708, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2c809eb7cb61e458bf3d7d196d5589, type: 3}
 --- !u!4 &556259511 stripped
@@ -12211,6 +12241,11 @@ PrefabInstance:
       propertyPath: explanationText
       value: 
       objectReference: {fileID: 174776102}
+    - target: {fileID: 3309588108291650774, guid: ddf9170f6d794fe4882e6f31e3ca05b7,
+        type: 3}
+      propertyPath: knife
+      value: 
+      objectReference: {fileID: 1822203840}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf9170f6d794fe4882e6f31e3ca05b7, type: 3}
 --- !u!1001 &1444302563
@@ -14656,6 +14691,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineLength: 1000
+--- !u!114 &1822203840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6320184803448126857, guid: 9c161776558b49c469d8823e7524a173,
+    type: 3}
+  m_PrefabInstance: {fileID: 367908725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822203837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79fe23e6df137e84191f54709a1e0801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1822203842 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 8894499100324907933, guid: 9c161776558b49c469d8823e7524a173,

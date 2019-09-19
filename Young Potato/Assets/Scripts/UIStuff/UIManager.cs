@@ -178,6 +178,7 @@ public class UIManager : MonoBehaviour
                     bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 0, 0, 1.0f);
                 }
 
+
                 soundManager.ExpensiveIngredient.Play();
 
             }
@@ -238,14 +239,20 @@ public class UIManager : MonoBehaviour
             case StatisfactionState.Dislike:
                 tastiness.text = "The student disliked that!";
                 soundManager.FoodBad.Play();
+                soundManager.Footsteps.Play();
+                soundManager.CashRegister.Play();
                 break;
             case StatisfactionState.Like:
                 tastiness.text = "The student liked that!";
                 soundManager.FoodGood.Play();
+                soundManager.Footsteps.Play();
+                soundManager.CashRegister.Play();
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
                 soundManager.FoodOkay.Play();
+                soundManager.Footsteps.Play();
+                soundManager.CashRegister.Play();
                 break;
         }
 

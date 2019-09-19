@@ -31,7 +31,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource MicrowaveCook;
     public AudioSource MicrowaveDone;
 
-    public List<Food> = new List<Food>();
+    public List<Food> FoodList = new List<Food>();
+    public Food food;
 
 
 
@@ -45,5 +46,13 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // GameObject.FindGameObjectsWithTag("frying")
+
+        /*
+        for (int i = 0; i < length; i++)
+        {
+            //FoodList.Add();
+        }
+       */
     }
 }

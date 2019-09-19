@@ -9,12 +9,16 @@ public class PickUpTutorial : Tutorial
     public Grabbable grabbedObject { get; set; }
     public Knife knife;
 
+    private bool IsGrabbing;
+
     public override void CheckIfHappening()
     {
-        if (grabbedObject == knife)
+        if (IsGrabbing && grabbedObject == knife)
         {
             TutorialManager.Instance.CompletedTutorial();
 
         }
     }
+
+
 }

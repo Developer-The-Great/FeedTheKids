@@ -178,7 +178,7 @@ public class Student : MonoBehaviour
             IsTiredOfWaiting = true;
             timeWaited = MaxWaitTime;
 
-            soundManager.Footsteps.Play();
+            
         }
 
 
