@@ -9863,7 +9863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1234248791
 BoxCollider:
@@ -12258,6 +12258,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3309588107357038824, guid: ddf9170f6d794fe4882e6f31e3ca05b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3309588107357038826, guid: ddf9170f6d794fe4882e6f31e3ca05b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12296,7 +12301,7 @@ PrefabInstance:
     - target: {fileID: 3309588107357038826, guid: ddf9170f6d794fe4882e6f31e3ca05b7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3309588107357038826, guid: ddf9170f6d794fe4882e6f31e3ca05b7,
         type: 3}
@@ -12331,6 +12336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Tutorial '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359548342091548431, guid: 3650e2bf4ffb2c54396ca25d03f67737,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8359548342458376216, guid: 3650e2bf4ffb2c54396ca25d03f67737,
         type: 3}
@@ -12380,7 +12390,7 @@ PrefabInstance:
     - target: {fileID: 8359548342091548427, guid: 3650e2bf4ffb2c54396ca25d03f67737,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8359548342091548427, guid: 3650e2bf4ffb2c54396ca25d03f67737,
         type: 3}

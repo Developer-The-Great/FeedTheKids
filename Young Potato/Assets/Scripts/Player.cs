@@ -95,6 +95,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+
+
         UIManager = GetComponent<UIManager>();
 
         grabber = GetComponent<Grabber>();
@@ -260,7 +262,7 @@ public class Player : MonoBehaviour
             {
                 hand.SetGrabbingFood();
             }
-            else if (grabber.grabbedObject is Knife)
+            else if (grabber.grabbedObject is Knife knife)
             {
                 hand.SetGrabbingKnife();
             }

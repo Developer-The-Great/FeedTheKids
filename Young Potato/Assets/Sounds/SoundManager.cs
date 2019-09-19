@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource MicrowaveCook;
     public AudioSource MicrowaveDone;
 
-    public List<Food> = new List<Food>();
+    //public List<Food> = new List<Food>();
 
 
 

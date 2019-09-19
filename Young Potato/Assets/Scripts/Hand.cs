@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-
+ 
     public Vector3 offset;
+
+    private Grabber grabber;
     private Animator animation;
 
     private Quaternion targetRotation;
+
+    private Vector3 initialOffset;
+    private Vector3 mousePosition;
     // Start is called before the first frame update
 
     private void Awake()
@@ -17,7 +22,8 @@ public class Hand : MonoBehaviour
     }
     void Start()
     {
-        
+        initialOffset = offset;
+        grabber = transform.root.GetComponent<Grabber>();
     }
 
     // Update is called once per frame
@@ -25,12 +31,31 @@ public class Hand : MonoBehaviour
 
     public void SetHandPosition(Vector3 mouseWorldPosition)
     {
+        mousePosition = mouseWorldPosition;
         gameObject.transform.position = mouseWorldPosition + offset;
     }
 
     public void Update()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.05f);
+
+        
+        
+    }
+
+    public void LateUpdate()
+    {
+        if (grabber.grabbedObject is Knife knife && Input.GetMouseButton(0))
+        {
+            Debug.Log("y lock");
+            float y = knife.transform.position.y - mousePosition.y;
+            float z = knife.transform.position.z - mousePosition.z;
+            offset = new Vector3(offset.x, y, z-0.2f);
+        }
+        else
+        {
+            offset = initialOffset;
+        }
     }
 
     public void DisableAll()
@@ -54,8 +79,10 @@ public class Hand : MonoBehaviour
 
     public void SetGrabbingKnife()
     {
+
         DisableAll();
         animation.SetBool("is_grabbing_knife", true);
+        
     }
 
     public void SetGrabbingFood()

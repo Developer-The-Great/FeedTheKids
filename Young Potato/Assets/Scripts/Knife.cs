@@ -24,7 +24,7 @@ public class Knife : Grabbable
         rb = GetComponent<Rigidbody>();
         knifePositions = new Queue<Vector3>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -69,6 +69,7 @@ public class Knife : Grabbable
     {
         if (player.grabber.grabbedObject != null)
         {
+           
             soundManager.Knife.Play();
             return player.grabber.grabbedObject.GetComponent<Knife>();
         }
