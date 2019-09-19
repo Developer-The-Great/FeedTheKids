@@ -48,6 +48,7 @@
 				float3 flow = tex2D(_FlowMap, IN.uv_MainTex).rgb;
 				flow.xy = flow.xy * 2 - 1;
 				flow *= _FlowStrength;
+
 				float noise = tex2D(_FlowMap, IN.uv_MainTex).a;
 				float time = _Time.y * _Speed + noise;
 				float2 jump = float2(_UJump, _VJump);
