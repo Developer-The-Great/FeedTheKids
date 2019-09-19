@@ -26,9 +26,6 @@ public class Student : MonoBehaviour
     private StudentManager studentManager;
     private SoundManager soundManager;
     
-    [SerializeField]private float statisfaction;
-
-
     [SerializeField]private Vector3 target;
 
     public bool setGoal;
@@ -56,14 +53,13 @@ public class Student : MonoBehaviour
     [SerializeField] private float fixedYPosition;
 
     private Animator animation;
-    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime,GameObject model)
+
+    public void Init(float pBudget,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime,GameObject model)
     {
 
         GameObject HumanModel = Instantiate(model,transform.position,Quaternion.identity);
 
         animation = HumanModel.GetComponentInChildren<Animator>();
-
-
 
         HumanModel.transform.parent = gameObject.transform;
 
@@ -71,7 +67,7 @@ public class Student : MonoBehaviour
         HumanModel.transform.localScale = new Vector3(1, 1, 1);
 
         StudentBudget = pBudget;
-        statisfaction = pStatisfaction;
+        
         StudentIndex = pIndex;
         studentManager = pStudentManager;
         MaxWaitTime = pMaxWaitTime;
@@ -84,11 +80,6 @@ public class Student : MonoBehaviour
     public float GetWaitPercentage()
     {
         return Mathf.Clamp(timeWaited / MaxWaitTime,0,1.0f);
-    }
-
-    public void Start()
-    {
-        
     }
 
     private void Awake()
@@ -106,15 +97,13 @@ public class Student : MonoBehaviour
 
         if (setGoal)
         {
-            Vector3 direction = target - gameObject.transform.position;
-            Move(GetYIgnoreVec(direction));
-            FollowOrientation(target);
-            animation.SetBool("is_walking", true);
+            MoveToGoal();
         }
         else
         {
             animation.SetBool("is_walking", false);
         }
+
         if(isServed)
         {
             trayInStudent.SetActive(true);
@@ -122,9 +111,16 @@ public class Student : MonoBehaviour
         }
     }
 
+    private void MoveToGoal()
+    {
+        Vector3 direction = target - gameObject.transform.position;
+        Move(GetYIgnoreVec(direction));
+        FollowOrientation(target);
+        animation.SetBool("is_walking", true);
+    }
+
     public void FollowOrientation(Vector3 lookAt)
     {
-
         Quaternion targetRotation = Quaternion.LookRotation(GetYIgnoreVec(lookAt + -Vector3.forward * 3) - GetYIgnoreVec(transform.position), Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.03f);
 
@@ -143,17 +139,11 @@ public class Student : MonoBehaviour
         if (Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)) < acceptableDistance)
         {
             setGoal = false;
-            //trayInStudent.SetActive(false);
-          
         }
-        
-        
         if(Vector3.Distance(transform.position,studentManager.GetExitPosition()) < 1)
         {
             studentManager.DestroyStudent(this);
         }
-
-
 
     }
 
@@ -171,13 +161,10 @@ public class Student : MonoBehaviour
     public void EnterPlayArea(Vector3 position)
     {
         GoTo(position);
-
-
     }
 
     public void ExitPlayArea()
     {
-
         GoTo(studentManager.GetExitPosition());
     }
 
@@ -185,7 +172,6 @@ public class Student : MonoBehaviour
     {
         timeWaited += Time.deltaTime;
 
-  
         if ( timeWaited >= 0.5f * MaxWaitTime && !hasComplained )
         {
             hasComplained = true;

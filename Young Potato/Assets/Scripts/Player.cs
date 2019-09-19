@@ -19,33 +19,20 @@ public class Player : MonoBehaviour
     private UIManager UIManager;
     private SoundManager soundManager;
 
-    public Tray[] tray; //{ private set; get; }
+    public Tray[] tray; 
 
-    [SerializeField] private float DishCost;
-    [SerializeField] private float IngredientCost;
-    [SerializeField] private float Budget;
-
-    [SerializeField] private int currentlySelectedStudent;
+    private float DishCost;
+    private float IngredientCost;
+    private float Budget;
 
     public Student[] currentlyServing = new Student[3];
 
-    public GameObject Selected;
+    public GameObject ObjectCurrentlyHovered { private set; get; }
 
     public FoodType currentType;
 
-    public int  currentStudentIndex
-    {
-        get
-        {
-            return currentlySelectedStudent;
-        }
-        set
-        {
-            currentlySelectedStudent = value;
-            
-        }
-    }
-
+    public int currentStudentIndex { private set; get; }
+    
     public float StudentBudget
     {
         get
@@ -96,7 +83,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
 
-
         UIManager = GetComponent<UIManager>();
 
         grabber = GetComponent<Grabber>();
@@ -112,9 +98,6 @@ public class Player : MonoBehaviour
         CamRotator = GetComponentInChildren<CameraRotator>();
     }
 
-    
-
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -157,7 +140,7 @@ public class Player : MonoBehaviour
             {
                 tray[i].transform.root.gameObject.SetActive(true);
                 currentlyServing[i].trayInStudent.SetActive(false);
-                //
+                
             }
 
         }
@@ -192,7 +175,8 @@ public class Player : MonoBehaviour
             hand.SetHandPosition(Hit.point);
 
             GameObject HitObj = Hit.transform.root.gameObject;
-            Selected = HitObj;
+
+            ObjectCurrentlyHovered = HitObj;
 
             Grabbable grabbedObject = HitObj.GetComponent<Grabbable>();
 
@@ -226,7 +210,7 @@ public class Player : MonoBehaviour
             }
             else if (button)
             {
-                Selected = button.gameObject;
+
                 if (mouseDownClickingObject)
                 {
                     Debug.Log("microwave button");
@@ -240,7 +224,7 @@ public class Player : MonoBehaviour
 
                 if (student)
                 {
-                    currentlySelectedStudent = student.StudentIndex;
+                    currentStudentIndex = student.StudentIndex;
                     StudentBudget = student.StudentBudget;
                     DishCost = tray[student.StudentIndex].DishCost;
                     currentType = student.preferedFood;
@@ -265,6 +249,7 @@ public class Player : MonoBehaviour
             else if (grabber.grabbedObject is Knife knife)
             {
                 hand.SetGrabbingKnife();
+                CamRotator.RotateTowardsPosition(CameraPosition.ToKnife);
             }
 
 
@@ -272,29 +257,26 @@ public class Player : MonoBehaviour
 
         if(grabber.grabbedObject != null)
         {
-            if (grabber.grabbedObject is Knife knife && Input.GetMouseButtonUp(1))
+            
+            if (grabber.grabbedObject is Knife knife && Input.GetMouseButtonDown(1))
             {
+                
                 knife.isCutting = true;
                 knife.Slice(grabber.MouseWorldPosition);
                 knife.SetKinematic(true);
+                
             }
         }
-        
-
       
     }
-
-
 
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            fillPosition(currentlySelectedStudent,false);
+            fillPosition(currentStudentIndex,false);
 
         }
-
-        //DishBudget = tray[currentlySelectedStudent].DishCost;
     }
 
     private void handleGrabbable(Grabbable grabbable, bool mouseClickingOnObject)
@@ -317,15 +299,11 @@ public class Player : MonoBehaviour
         }
         else if (grabbable is Knife knife)
         {
-            
             if (NotCurrentlyGrabbing && mouseClickingOnObject)
             {
                 grabber.grabGrabbable(knife);
                 
-
             }
-            
-            
         }
     }
 
@@ -335,12 +313,9 @@ public class Player : MonoBehaviour
         {
             IngredientBudget += food.FoodCost;
             food.InContainer = false;
-
         }
-
     }
     
-
     public void fillPosition(int positionIndex, bool isTimeChecking)
     {
 
@@ -395,12 +370,4 @@ public class Player : MonoBehaviour
 
         UIManager.UpdateBudgetText();
     }
-
-
-    
-
-  
-
-
-   
 }

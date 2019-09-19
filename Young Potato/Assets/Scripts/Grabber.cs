@@ -5,41 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class Grabber : MonoBehaviour
 {
-
-
     private Player player;
     private InputController inputController;
  
 
     public Vector3 Offset;
 
-    private Vector3 mouseWorldPosition;
+
 
     public Grabbable grabbedObject { get; private set; }
     private SoundManager soundManager;
 
     public bool IsGrabbing;
 
-    public Vector3 MouseWorldPosition
-    {
-        get
-        {
-            return mouseWorldPosition;
-        }
-        set
-        {
-            mouseWorldPosition = value;
+    public Vector3 MouseWorldPosition { set; get; }
 
-        }
-    }
-    
+    public GameObject grabDebug;
 
     private void Awake()
     {
         inputController = GameManager.Manager.Input;
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
-
-
     }
 
     // Start is called before the first frame update
@@ -48,15 +34,12 @@ public class Grabber : MonoBehaviour
         player = GetComponent<Player>();
 
         Debug.Assert(player);
-
-
     }
 
     public void grabGrabbable(Grabbable grab)
     {
         grab.SetRayCastInvisibility(true);
         
-
         grabbedObject = grab;
         IsGrabbing = true;
 
@@ -64,6 +47,7 @@ public class Grabber : MonoBehaviour
         {
             soundManager.Knife.Play();
         }
+        grabDebug = grab.gameObject;
     }
 
     public void stopGrabbing()
@@ -87,7 +71,7 @@ public class Grabber : MonoBehaviour
 
     public void holdGrabbable(float distanceMultiplier)
     {
-        grabbedObject.transform.position = mouseWorldPosition + grabbedObject.liftingOffset * distanceMultiplier;
+        grabbedObject.transform.position = MouseWorldPosition + grabbedObject.liftingOffset * distanceMultiplier;
         grabbedObject.transform.rotation = Quaternion.identity;
         grabbedObject.GetComponent<Grabbable>().stopAngularVelocity();
     }
@@ -97,9 +81,9 @@ public class Grabber : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (mouseWorldPosition != null)
+        if (MouseWorldPosition != null)
         {
-            Gizmos.DrawSphere(mouseWorldPosition, 0.1f);
+            Gizmos.DrawSphere(MouseWorldPosition, 0.1f);
         }
 
     }

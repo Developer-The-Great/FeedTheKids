@@ -10,6 +10,7 @@ public struct FoodData
     public float burntness;
     public float coldness;
 }
+
 [RequireComponent(typeof(Rigidbody))]
 public class Food : Grabbable
 {
@@ -21,6 +22,7 @@ public class Food : Grabbable
     public GameObject smokeObj;
 
     [SerializeField] [Range(0,1)] float addedSeperation;
+
     public FoodType FoodType
     {
         get { return foodType; }
@@ -30,8 +32,7 @@ public class Food : Grabbable
 
     [SerializeField] private FoodType foodType;
 
-    [SerializeField] private float BurnCoefficient = 1f;
-    float add;
+    private float add;
 
     [Range(0.0f, 100.0f)] [SerializeField] private float cookTime;
 
@@ -43,14 +44,8 @@ public class Food : Grabbable
 
     public float Coldness { private set; get; }
 
-
-    public float showFried;
-    public float showBoildness;
-    public float showBurntness;
-    public float showColdness;
-
-
     public Transform[] cutLocations;
+
     public GameObject[] foodBits;
 
     public Vector3 offset;
@@ -180,11 +175,8 @@ public class Food : Grabbable
   
     }
 
-    public GameObject test;
-
     private void Awake()
     {
-        test = GameObject.FindGameObjectWithTag("SoundManager");
         InContainer = true;
         Coldness = 1;
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
@@ -200,11 +192,6 @@ public class Food : Grabbable
 
     private void Update()
     {
-        showFried = Friedness;
-        showBoildness = Boildness;
-        showColdness = Coldness;
-        showBurntness = Burntness;
-
         coolDown();
     }
 
@@ -288,10 +275,7 @@ public class Food : Grabbable
                 }
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lerpVal);
             }
-
-          
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -311,8 +295,6 @@ public class Food : Grabbable
                 }
                 
                 Cut(contactPoint);
-                Debug.Log("cutting food");
-                //StartCoroutine(knife.disableCollision());
                 knife.isCutting = false;
             }
 
@@ -331,7 +313,6 @@ public class Food : Grabbable
 
     private void OnCollisionExit(Collision collision)
     {
-
         if (collision.gameObject.tag == "cuttingBoard")
         {
 
@@ -340,10 +321,6 @@ public class Food : Grabbable
 
         }
     }
-
-
-
- 
 
     public override void SetRayCastInvisibility(bool isInvisible)
     {
@@ -484,6 +461,7 @@ public class Food : Grabbable
 
         Vector3[] foodLocalScale = new Vector3[firstFoodBit.Length];
 
+        //copy all the foodBits from the first foodBit to the FoodBitIndex
         for (int i = 0; i < firstFoodBit.Length; i++)
         {
             firstFoodBit[i] = Instantiate(foodBits[i]);
@@ -491,9 +469,10 @@ public class Food : Grabbable
 
         }
 
-        //find its transforms
+        //initialize the array that will hold the first cut locations
         Transform[] firstCutLocations = new Transform[FoodBitIndex + 1];
 
+        //create new transforms for the first cut 
         for (int i = 0; i < firstCutLocations.Length; i++)
         {
             firstCutLocations[i] = Instantiate(cutLocations[i]);
@@ -505,7 +484,6 @@ public class Food : Grabbable
 
 
         firstFoodObj.transform.localScale = transform.localScale;
-        //firstFoodObj.transform.rotation = transform.rotation;
 
         Food firstFoodPiece = firstFoodObj.AddComponent<Food>();
 
@@ -515,11 +493,12 @@ public class Food : Grabbable
             cookTime,initialLoc,addedSeperation, foodData,smokeObj);
 
 
-        ///////////////create other cut 
-        ///
+        //-------------- CREATE OTHER CUT---------------
+
         GameObject[] otherFoodBit = new GameObject[foodBits.Length - FoodBitIndex];
         Vector3[] otherFoodLocalScale = new Vector3[otherFoodBit.Length];
 
+        //copy all the food bits from FoodBitIndex to the last FoodBit
         for (int i = FoodBitIndex; i < foodBits.Length; i++)
         {
             otherFoodBit[i - FoodBitIndex] = Instantiate(foodBits[i]);

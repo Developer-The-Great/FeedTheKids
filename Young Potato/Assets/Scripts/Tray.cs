@@ -5,32 +5,16 @@ using UnityEngine;
 
 public class Tray : Container
 {
-
-    
-    Destroyer foodDestroyer;
-
-   
-
-
     public float DishCost { get; private set; }
 
     public float showDistCost;
 
     public GameObject debugShowObj;
 
-   
-
-   
-
     private void Start()
     {
         transform.parent.parent = null;
         player.DishBudget = 0;
-       
-        //foodDestroyer = GetComponent<Destroyer>();
-
-        
-
     }
 
     public void FixedUpdate()
@@ -42,36 +26,26 @@ public class Tray : Container
 
     private void OnTriggerStay(Collider other)
     {
-
         Food foodFound = CheckDuplicate(other.transform.root.GetComponent<Food>());
         
         if (foodFound)
         {
-      
             foodInTray.Add(foodFound);
             addFoodCost(foodFound);
-    
-            
         }
 
     }
 
-    
     public void Update()
     {
-
-
         showDistCost = DishCost;
-
-
-
     }
+
     private void addFoodCost(Food food)
     {
         DishCost += food.FoodCost;
     }
 
- 
     public void GiveFood(Student student)
     {
         foreach(Food food in foodInTray)
@@ -80,5 +54,4 @@ public class Tray : Container
         }
     }
    
-
 }
