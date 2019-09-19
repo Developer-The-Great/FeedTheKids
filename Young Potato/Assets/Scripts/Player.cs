@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         StudentBudget = studentManager.studentBudget[0];
         UIManager.UpdateBudgetText();
 
-        UIManager.UpdateRequestText(currentType);
+        UIManager.UpdateRequestText();
 
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
 
@@ -135,9 +135,15 @@ public class Player : MonoBehaviour
             if(currentlyServing[i].setGoal)
             {
                 tray[i].transform.root.gameObject.SetActive(false);
+                UIManager.racks[i].gameObject.SetActive(false);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(false);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(false);
             }
             else
             {
+                UIManager.racks[i].gameObject.SetActive(true);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(true);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(true);
                 tray[i].transform.root.gameObject.SetActive(true);
                 currentlyServing[i].trayInStudent.SetActive(false);
                 
@@ -228,7 +234,7 @@ public class Player : MonoBehaviour
                     StudentBudget = student.StudentBudget;
                     DishCost = tray[student.StudentIndex].DishCost;
                     currentType = student.preferedFood;
-                    UIManager.UpdateRequestText(currentType);
+                    UIManager.UpdateRequestText();
                 }
             }
         }
