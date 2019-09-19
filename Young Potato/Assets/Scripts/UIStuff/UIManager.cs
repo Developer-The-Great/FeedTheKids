@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     private CanvasScaler scaler;
 
     private GameObject bManager;
-    [SerializeField] private Transform[] racks;
+    public Transform[] racks;
     [SerializeField] private GameObject[] bBills1;
     [SerializeField] private GameObject[] bBills2;
     [SerializeField] private GameObject[] bBills3;
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] tBills3;
 
     private GameObject earnings;
-    private GameObject buttons;
+    public GameObject buttons;
 
     private bool checkedWin = false;
     private GameObject[] stars = new GameObject[5];
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
     private Transform[] billHolders = new Transform[3];
 
     public Sprite[] images = new Sprite[5];
-    private GameObject bobble;
+    public GameObject bobble;
 
     private GameObject detailToggle;
     
@@ -289,11 +289,11 @@ public class UIManager : MonoBehaviour
         moneyEarnedText.text = "$" + earned;
     }
 
-    public void UpdateRequestText(FoodType foodType)
+    public void UpdateRequestText()
     {
         for (int i = 0; i < 3; i++)
         {
-            foodType = player.currentlyServing[i].preferedFood;
+            FoodType foodType = player.currentlyServing[i].preferedFood;
             switch (foodType)
             {
                 case FoodType.Apple:
@@ -434,14 +434,6 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         served.gameObject.SetActive(false);
         tastiness.gameObject.SetActive(false);
-    }
-
-    public void toggleStudentUI(int studentPosition)
-    {
-        bool stateToSet = !racks[studentPosition].gameObject.activeInHierarchy;
-        racks[studentPosition].gameObject.SetActive(stateToSet);
-        bobble.transform.GetChild(studentPosition).gameObject.SetActive(stateToSet);
-        buttons.transform.GetChild(studentPosition).gameObject.SetActive(stateToSet);
     }
 
     public void next1()
