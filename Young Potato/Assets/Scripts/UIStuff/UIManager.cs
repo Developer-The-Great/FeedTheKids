@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     private Text cost;
     private Text studentIndexText;
     private Text moneyEarnedText;
+    private Text starvingText;
     private Text requestText;
 
 
@@ -83,6 +84,8 @@ public class UIManager : MonoBehaviour
         
 
         moneyEarnedText = GameObject.FindGameObjectWithTag("moneyEarnedText").GetComponent<Text>();
+        
+        starvingText = GameObject.FindGameObjectWithTag("StarvingChildrenText").GetComponent<Text>();
 
         studentIndexText = GameObject.FindGameObjectWithTag("studentIndexText").GetComponent<Text>();
 
@@ -312,6 +315,7 @@ public class UIManager : MonoBehaviour
             likedText.text = "Times food was liked " + studentManager.likeCount;
             dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
             okText.text = "Times food was ok " + studentManager.okCount;
+            starvingText.text = studentManager.starvingCount + " Starving Children";
             float whole = Mathf.Round(studentManager.moneyEarned);
             float deci = Mathf.Round((studentManager.moneyEarned - whole)*100)/100;
             float earned = whole + deci;
