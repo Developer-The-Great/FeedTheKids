@@ -32,8 +32,11 @@ public class FoodStateChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        food = transform.root.gameObject.GetComponent<Food>();
+        if(!food)
+        {
+            food = transform.root.gameObject.GetComponent<Food>();
+        }
+       
 
         burntness = food.Burntness;
         boildness = food.Boildness;

@@ -9,6 +9,8 @@ public enum FoodType
     Potato,
     Apple,
     Hamburger,
+    Gogurt,
+    Milk,
     None
 
 }
@@ -53,8 +55,21 @@ public class Student : MonoBehaviour
 
     [SerializeField] private float fixedYPosition;
 
-    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime)
+    private Animator animation;
+    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime,GameObject model)
     {
+
+        GameObject HumanModel = Instantiate(model,transform.position,Quaternion.identity);
+
+        animation = HumanModel.GetComponentInChildren<Animator>();
+
+
+
+        HumanModel.transform.parent = gameObject.transform;
+
+        HumanModel.transform.localPosition = Vector3.zero;
+        HumanModel.transform.localScale = new Vector3(1, 1, 1);
+
         StudentBudget = pBudget;
         statisfaction = pStatisfaction;
         StudentIndex = pIndex;
@@ -94,8 +109,12 @@ public class Student : MonoBehaviour
             Vector3 direction = target - gameObject.transform.position;
             Move(GetYIgnoreVec(direction));
             FollowOrientation(target);
+            animation.SetBool("is_walking", true);
         }
-
+        else
+        {
+            animation.SetBool("is_walking", false);
+        }
         if(isServed)
         {
             trayInStudent.SetActive(true);
@@ -120,7 +139,7 @@ public class Student : MonoBehaviour
     public void Move(Vector3 direction)
     {
         characterController.SimpleMove(direction.normalized * speed);
-        Debug.Log("distance to target" + Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)));
+
         if (Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)) < acceptableDistance)
         {
             setGoal = false;
