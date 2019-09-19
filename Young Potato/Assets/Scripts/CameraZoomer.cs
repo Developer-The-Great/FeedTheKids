@@ -16,7 +16,7 @@ public class CameraZoomer : MonoBehaviour
     public float knifeZoom;
     private float Default;
     
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class CameraZoomer : MonoBehaviour
                 camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, Default, 0.05f);
                 break;
             case ZoomMode.KnifeZoom:
-                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, knifeZoom, 0.05f);
+                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, knifeZoom, 0.1f);
                 break;
         }
     }
