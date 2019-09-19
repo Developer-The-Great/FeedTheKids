@@ -37,6 +37,8 @@ TagManager:
   - Earnings
   - Buttons
   - StarvingKidsText
+  - Star
+  - TranStar
   layers:
   - Default
   - TransparentFX

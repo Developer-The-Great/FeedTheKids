@@ -136,17 +136,6 @@ public class Player : MonoBehaviour
             {
                 fillPosition(i,true);
             }
-
-            if(currentlyServing[i].setGoal)
-            {
-                tray[i].transform.root.gameObject.SetActive(false);
-    
-            }
-            else
-            {
-                tray[i].transform.root.gameObject.SetActive(true);
-                currentlyServing[i].trayInStudent.SetActive(false);
-            }
         }
 
        
@@ -260,7 +249,7 @@ public class Player : MonoBehaviour
       
     }
 
-   
+
 
     private void LateUpdate()
     {
@@ -330,25 +319,29 @@ public class Player : MonoBehaviour
 
             if(!previousStudent.isBroke &&  tray[positionIndex].DishCost > previousStudent.StudentBudget && !isTimeChecking)
             {
-                if (Mathf.Approximately(tray[positionIndex].DishCost, 0))
-                    studentManager.starvingCount ++;
                 return;
             }
-            tray[positionIndex].GiveFood(previousStudent);
+
+            if (Mathf.Approximately(tray[positionIndex].DishCost, 0) && previousStudent.isBroke)
+                studentManager.starvingCount ++;
+            
             Vector3 exitPoint = studentManager.GetExitPosition();
 
             previousStudent.ExitPlayArea();
-            previousStudent.trayInStudent.SetActive(true);
 
             float statisfaction =  studentManager.GetStatisfaction(previousStudent, tray[positionIndex]);
             Debug.Log("statisfaction: " + statisfaction);
             Debug.Log("tray[positionIndex]: " + tray[positionIndex].DishCost);
-            studentManager.AddMoneyEarned(statisfaction, tray[positionIndex].DishCost);
+            if (previousStudent.isBroke)
+                studentManager.AddMoneyEarned(-statisfaction, tray[positionIndex].DishCost);
+            else
+                studentManager.AddMoneyEarned(statisfaction, tray[positionIndex].DishCost);
+            
 
             StatisfactionState likeness = studentManager.FindLikeness(statisfaction);
 
             StartCoroutine(UIManager.displayServed(likeness));
-            
+            tray[positionIndex].DestroyFood();
 
 
             

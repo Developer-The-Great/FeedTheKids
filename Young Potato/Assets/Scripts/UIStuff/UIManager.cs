@@ -54,7 +54,12 @@ public class UIManager : MonoBehaviour
 
     private GameObject earnings;
     private GameObject buttons;
-   
+
+    private bool checkedWin = false;
+    private GameObject[] stars = new GameObject[5];
+    public Sprite overstar;
+
+    private GameObject[] spots = new GameObject[5];
 
     private void Awake()
     {
@@ -87,8 +92,6 @@ public class UIManager : MonoBehaviour
         
         starvingText = GameObject.FindGameObjectWithTag("StarvingKidsText").GetComponent<Text>();
 
-        studentIndexText = GameObject.FindGameObjectWithTag("studentIndexText").GetComponent<Text>();
-
         ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
 
         served = GameObject.FindGameObjectWithTag("servingText").GetComponent<Text>();
@@ -114,8 +117,7 @@ public class UIManager : MonoBehaviour
 
         cost = GameObject.FindGameObjectWithTag("cost").GetComponent<Text>();
         cost.text = "";
-
-        studentIndexText.text = "";
+        
         UpdateMoneyEarnedText();
 
         finishText = GameObject.Find("Finish").GetComponent<Text>();
@@ -128,6 +130,8 @@ public class UIManager : MonoBehaviour
         earnings = GameObject.FindGameObjectWithTag("Earnings");
         buttons = GameObject.FindGameObjectWithTag("Buttons");
 
+        stars = GameObject.FindGameObjectsWithTag("Star");
+        spots = GameObject.FindGameObjectsWithTag("TranStar");
     }
 
     private void Start()
@@ -159,25 +163,38 @@ public class UIManager : MonoBehaviour
             for (int j = 0; j < 10; j++)
             {
                 bRacks[i][j].GetComponent<Image>().fillAmount = 0;
+                bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
-            if (player.tray[i].DishCost % 1 == 0)
+            if (player.currentlyServing[i] == null) continue;
+            if (player.tray[i].DishCost > 10 || player.tray[i].DishCost > player.currentlyServing[i].StudentBudget)
             {
-                for (int j = 0; j < player.tray[i].DishCost; j++)
+                for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
                 {
                     bRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                    bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 0, 0, 1.0f);
                 }
             }
             else
             {
-                for (int j = 0; j < player.tray[i].DishCost-1; i++)
+                if (player.tray[i].DishCost % 1 == 0)
                 {
-                    bRacks[i][j].GetComponent<Image>().fillAmount = 1;
-                    if (j == player.tray[i].DishCost-1)
+                    for (int j = 0; j < player.tray[i].DishCost; j++)
                     {
-                        bRacks[i][j+1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                        bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                     }
                 }
-                
+                else
+                {
+                    for (int j = 0; j < player.tray[i].DishCost - 1; j++)
+                    {
+                        bRacks[i][j].GetComponent<Image>().fillAmount = 1;
+                        if (j == player.tray[i].DishCost - 1)
+                        {
+                            bRacks[i][j + 1].GetComponent<Image>().fillAmount = player.tray[i].DishCost % 1;
+                        }
+                    }
+
+                }
             }
         }
 
@@ -264,25 +281,29 @@ public class UIManager : MonoBehaviour
 
     public void DisplayFoodInformation(Food food)
     {
-        //
-        //
-        Vector2 mousePosition = new Vector2(Input.mousePosition.x * scaler.referenceResolution.x / Screen.width, Input.mousePosition.y * scaler.referenceResolution.y / Screen.height);
+        if (!checkedWin)
+        {
+            //
+            //
+            Vector2 mousePosition = new Vector2(Input.mousePosition.x * scaler.referenceResolution.x / Screen.width,
+                Input.mousePosition.y * scaler.referenceResolution.y / Screen.height);
 
-        loadingCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition;
-        loadingCircle.fillAmount = food.GetReadiness();
-        loadingCircle.gameObject.SetActive(true);
+            loadingCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition;
+            loadingCircle.fillAmount = food.GetReadiness();
+            loadingCircle.gameObject.SetActive(true);
 
 
-        burntnessCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition;
-        burntnessCircle.fillAmount = food.Burntness;
-        burntnessCircle.gameObject.SetActive(true);
+            burntnessCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition;
+            burntnessCircle.fillAmount = food.Burntness;
+            burntnessCircle.gameObject.SetActive(true);
 
-        centerCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + centerOffset;
-        centerCircle.gameObject.SetActive(true);
+            centerCircle.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + centerOffset;
+            centerCircle.gameObject.SetActive(true);
 
-        cost.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + new Vector2(0, 12);
-        cost.text = "$" + food.FoodCost;
-        cost.gameObject.SetActive(true);
+            cost.gameObject.GetComponent<RectTransform>().anchoredPosition = mousePosition + new Vector2(0, 12);
+            cost.text = "$" + food.FoodCost;
+            cost.gameObject.SetActive(true);
+        }
 
 
     }
@@ -295,12 +316,12 @@ public class UIManager : MonoBehaviour
 
     }
 
-   
     // Update is called once per frame
     void Update()
     {
-        if (studentManager.CheckWin())
+        if (studentManager.CheckWin() && !checkedWin)
         {
+            checkedWin = true;
             ingredientText.gameObject.SetActive(false);
             bManager.gameObject.SetActive(false);
             earnings.gameObject.SetActive(false);
@@ -309,9 +330,8 @@ public class UIManager : MonoBehaviour
             served.gameObject.SetActive(false);
             tastiness.gameObject.SetActive(false);
             cost.gameObject.SetActive(false);
-            studentIndexText.gameObject.SetActive(false);
             moneyEarnedText.gameObject.SetActive(false);
-
+            DeactivateFoodInformation();
 
             likedText.text = "Times food was liked " + studentManager.likeCount;
             dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
@@ -332,9 +352,32 @@ public class UIManager : MonoBehaviour
             moneyText.gameObject.SetActive(true);
             starvingText.gameObject.SetActive(true);
 
-
-
-
+            int star = 0;
+            if (earned >= 10.0f)
+                star++;
+            if (earned >= 20.0f)
+                star++;
+            if (earned >= 30.0f)
+                star++;
+            if (studentManager.dislikeCount <= 2)
+                star++;
+            if (studentManager.likeCount >= 4)
+                star++;
+            if (studentManager.starvingCount == 0)
+                star++;
+            for (int i = 0; i < star; i++)
+            {
+                if(i < 6)
+                    LeanTween.move(stars[i], spots[i].transform, 3.0f);
+                else
+                {
+                    stars[0].GetComponent<Image>().sprite = overstar;
+                    stars[1].GetComponent<Image>().sprite = overstar;
+                    stars[2].GetComponent<Image>().sprite = overstar;
+                    stars[3].GetComponent<Image>().sprite = overstar;
+                    stars[4].GetComponent<Image>().sprite = overstar;
+                }
+            }
         }
 
     }
