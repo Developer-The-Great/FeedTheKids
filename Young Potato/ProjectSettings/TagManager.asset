@@ -42,6 +42,9 @@ TagManager:
   - SoundManager
   - BillHolder
   - DetailToggle
+  - ButtonHolder
+  - ToggleHolder
+  - BobbleHolder
   layers:
   - Default
   - TransparentFX

@@ -64,6 +64,8 @@ public class UIManager : MonoBehaviour
     private GameObject[] spots = new GameObject[5];
 
     private Transform[] billHolders = new Transform[3];
+    private Transform[] buttonHolders = new Transform[3];
+    private Transform[] bobbleHolders = new Transform[3];
 
     public Sprite[] images = new Sprite[5];
     public GameObject bobble;
@@ -150,9 +152,13 @@ public class UIManager : MonoBehaviour
         spots = GameObject.FindGameObjectsWithTag("TranStar");
 
         Transform billHolder = GameObject.FindGameObjectWithTag("BillHolder").transform;
+        Transform buttonHolder = GameObject.FindGameObjectWithTag("ButtonHolder").transform;
+        Transform bobbleHolder = GameObject.FindGameObjectWithTag("BobbleHolder").transform;
         for (int i = 0; i < 3; i++)
         {
             billHolders[i] = billHolder.GetChild(i);
+            buttonHolders[i] = buttonHolder.GetChild(i);
+            bobbleHolders[i] = bobbleHolder.GetChild(i);
         }
 
         detailToggle = GameObject.FindGameObjectWithTag("DetailToggle");
@@ -360,9 +366,12 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Camera mainCamera = Camera.main;
         for (int i = 0; i < 3; i++)
         {
-            racks[i].position = Camera.main.WorldToScreenPoint(billHolders[i].position);
+            racks[i].position = mainCamera.WorldToScreenPoint(billHolders[i].position);
+            bobble.transform.GetChild(i).position = mainCamera.WorldToScreenPoint(bobbleHolders[i].position);
+            buttons.transform.GetChild(i).position = mainCamera.WorldToScreenPoint(buttonHolders[i].position);
         }
         
         if (studentManager.CheckWin() && !checkedWin)
