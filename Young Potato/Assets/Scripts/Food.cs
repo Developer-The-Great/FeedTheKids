@@ -70,7 +70,6 @@ public class Food : Grabbable
         }
     }
 
-    ///test
     public void Init(Vector3 pPositon,GameObject[] pFoodBits,Transform[] pCutLocations,
         Vector3 pOffset,Vector3 pCutOffset,Vector3[] localScale,
         Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation,FoodData data)
@@ -92,7 +91,7 @@ public class Food : Grabbable
 
 
 
-        liftingOffset = pLiftingOffset;
+        liftingOffset = new Vector3(0,pLiftingOffset.y,0);
 
         
 

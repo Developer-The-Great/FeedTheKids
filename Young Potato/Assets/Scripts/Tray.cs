@@ -24,6 +24,7 @@ public class Tray : Container
 
     private void Start()
     {
+        transform.parent = null;
         player.DishBudget = 0;
        
         //foodDestroyer = GetComponent<Destroyer>();
