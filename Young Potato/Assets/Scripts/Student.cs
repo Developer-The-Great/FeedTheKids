@@ -9,6 +9,8 @@ public enum FoodType
     Potato,
     Apple,
     Hamburger,
+    Gogurt,
+    Milk,
     None
 
 }
@@ -22,7 +24,7 @@ public class Student : MonoBehaviour
     private Vector3 worldPositionInfoLocation;
     private GameObject selectedIndicator;
     private StudentManager studentManager;
-
+    private SoundManager soundManager;
     
     [SerializeField]private float statisfaction;
 
@@ -30,6 +32,8 @@ public class Student : MonoBehaviour
     [SerializeField]private Vector3 target;
 
     public bool setGoal;
+
+    private bool hasComplained;
 
     private float acceptableDistance;
 
@@ -51,8 +55,21 @@ public class Student : MonoBehaviour
 
     [SerializeField] private float fixedYPosition;
 
-    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime)
+    private Animator animation;
+    public void Init(float pBudget,float pStatisfaction,int pIndex,StudentManager pStudentManager,FoodType pRequest,float pMaxWaitTime,GameObject model)
     {
+
+        GameObject HumanModel = Instantiate(model,transform.position,Quaternion.identity);
+
+        animation = HumanModel.GetComponentInChildren<Animator>();
+
+
+
+        HumanModel.transform.parent = gameObject.transform;
+
+        HumanModel.transform.localPosition = Vector3.zero;
+        HumanModel.transform.localScale = new Vector3(1, 1, 1);
+
         StudentBudget = pBudget;
         statisfaction = pStatisfaction;
         StudentIndex = pIndex;
@@ -78,6 +95,8 @@ public class Student : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         acceptableDistance = speed / 50;
+
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -90,11 +109,16 @@ public class Student : MonoBehaviour
             Vector3 direction = target - gameObject.transform.position;
             Move(GetYIgnoreVec(direction));
             FollowOrientation(target);
+            animation.SetBool("is_walking", true);
         }
-
+        else
+        {
+            animation.SetBool("is_walking", false);
+        }
         if(isServed)
         {
             trayInStudent.SetActive(true);
+            soundManager.CashRegister.Play();
         }
     }
 
@@ -115,7 +139,7 @@ public class Student : MonoBehaviour
     public void Move(Vector3 direction)
     {
         characterController.SimpleMove(direction.normalized * speed);
-        Debug.Log("distance to target" + Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)));
+
         if (Vector3.Distance(GetYIgnoreVec(gameObject.transform.position), GetYIgnoreVec(target)) < acceptableDistance)
         {
             setGoal = false;
@@ -161,11 +185,22 @@ public class Student : MonoBehaviour
     {
         timeWaited += Time.deltaTime;
 
+  
+        if ( timeWaited >= 0.5f * MaxWaitTime && !hasComplained )
+        {
+            hasComplained = true;
+            soundManager.Waiting.Play();
+
+        }
         if(timeWaited > MaxWaitTime)
         {
             IsTiredOfWaiting = true;
             timeWaited = MaxWaitTime;
+
+            soundManager.Footsteps.Play();
         }
+
+
     }
 
   

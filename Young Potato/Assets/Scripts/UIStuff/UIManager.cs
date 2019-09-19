@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     Player player;
     StudentManager studentManager;
 
+    public SoundManager soundManager;
+
     private Text ingredientText;
     private Text dishText;
     private Text budgetText;
@@ -96,6 +98,8 @@ public class UIManager : MonoBehaviour
 
         served = GameObject.FindGameObjectWithTag("servingText").GetComponent<Text>();
 
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
         tastiness = GameObject.FindGameObjectWithTag("tastinessText").GetComponent<Text>();
 
         loadingCircle = GameObject.FindGameObjectWithTag("loadingCircle").GetComponent<Image>();
@@ -173,6 +177,9 @@ public class UIManager : MonoBehaviour
                     bRacks[i][j].GetComponent<Image>().fillAmount = 1;
                     bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 0, 0, 1.0f);
                 }
+
+                soundManager.ExpensiveIngredient.Play();
+
             }
             else
             {
@@ -229,13 +236,23 @@ public class UIManager : MonoBehaviour
         switch (likeness)
         {
             case StatisfactionState.Dislike:
+<<<<<<< HEAD
                 tastiness.text = "The student doesn't like it !";
                 break;
             case StatisfactionState.Like:
                 tastiness.text = "The student likes it !";
+=======
+                tastiness.text = "The student disliked that!";
+                soundManager.FoodBad.Play();
+                break;
+            case StatisfactionState.Like:
+                tastiness.text = "The student liked that!";
+                soundManager.FoodGood.Play();
+>>>>>>> 15f5e46500b58c989a13de2a1f1005b1133829f2
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
+                soundManager.FoodOkay.Play();
                 break;
         }
 

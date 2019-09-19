@@ -15,8 +15,10 @@ public class Food : Grabbable
 {
     GameObject TrayToStickTo;
     Vector3 stickPositionOffset;
+
     public bool isStickMode;
 
+    public GameObject smokeObj;
 
     [SerializeField] [Range(0,1)] float addedSeperation;
     public FoodType FoodType
@@ -60,6 +62,7 @@ public class Food : Grabbable
 
 
     public Vector3 initialLoc;
+    [SerializeField] private SoundManager soundManager;
 
     [SerializeField]private float costPerPiece;
 
@@ -99,8 +102,12 @@ public class Food : Grabbable
 
     public void Init(Vector3 pPositon,GameObject[] pFoodBits,Transform[] pCutLocations,
         Vector3 pOffset,Vector3 pCutOffset,Vector3[] localScale,
-        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation,FoodData data)
+        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation,FoodData data,GameObject pSmokeObj)
     {
+
+        smokeObj = pSmokeObj;
+
+        smokeObj.transform.parent = gameObject.transform;
 
         Friedness = data.friedness;
         Boildness = data.boiledness;
@@ -157,6 +164,9 @@ public class Food : Grabbable
 
         }
 
+
+        smokeObj.transform.localPosition = (cutLocations[0].localPosition + cutLocations[cutLocations.Length - 1].localPosition) / 2;
+
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
@@ -170,10 +180,14 @@ public class Food : Grabbable
   
     }
 
+    public GameObject test;
+
     private void Awake()
     {
+        test = GameObject.FindGameObjectWithTag("SoundManager");
         InContainer = true;
         Coldness = 1;
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     void Start()
@@ -213,12 +227,38 @@ public class Food : Grabbable
         IsCookedInTimeStep = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "frying")
+        {
+            soundManager.Sizzling.Play();
+        }
+
+        if (other.tag == "boiling")
+        {
+            soundManager.WaterBoiling.Play();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "frying")
+        {
+            soundManager.Sizzling.Stop();
+        }
+
+        if (other.tag == "boiling")
+        {
+            soundManager.WaterBoiling.Stop();
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "frying")
         {
             fry();
         }
+
         else if(other.tag == "boiling")
         {
             boil();
@@ -266,6 +306,7 @@ public class Food : Grabbable
 
                 if (collision.contactCount >= 2)
                 {
+                    soundManager.Cutting.Play();
                     contactPoint = Vector3.Lerp(collision.GetContact(0).point, collision.GetContact(1).point, 0.5f);
                 }
                 
@@ -328,7 +369,7 @@ public class Food : Grabbable
     public float GetReadiness()
     {
 
-        if(FoodType == FoodType.Apple || FoodType == FoodType.Hamburger)
+        if(FoodType == FoodType.Apple || FoodType == FoodType.Hamburger || FoodType == FoodType.Gogurt)
         {
             return 1.0f;
         }
@@ -347,7 +388,7 @@ public class Food : Grabbable
     {
         if(IsCookedInTimeStep)
         {
-            
+
             return;
         }
         
@@ -471,7 +512,7 @@ public class Food : Grabbable
         firstFoodPiece.Init(transform.position, firstFoodBit, firstCutLocations, 
             offset, cutOffset, foodLocalScale,
             liftingOffset,costPerPiece, transform.rotation,
-            cookTime,initialLoc,addedSeperation, foodData);
+            cookTime,initialLoc,addedSeperation, foodData,smokeObj);
 
 
         ///////////////create other cut 
@@ -506,7 +547,7 @@ public class Food : Grabbable
         otherFoodPiece.Init(newPosition, otherFoodBit, otherCutLocations, 
             offset, cutOffset, otherFoodLocalScale, 
             liftingOffset,costPerPiece,transform.rotation,
-            cookTime, initialLoc, addedSeperation, foodData);
+            cookTime, initialLoc, addedSeperation, foodData,smokeObj);
 
         Destroy(gameObject);
 

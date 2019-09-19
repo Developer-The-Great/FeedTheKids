@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sound : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     //Background
     public AudioSource BackgroundMusic;
@@ -27,6 +27,12 @@ public class Sound : MonoBehaviour
     public AudioSource WaterBoiling;
     public AudioSource FireAlarm;
     public AudioSource Footsteps;
+    public AudioSource MicrowaveDoor;
+    public AudioSource MicrowaveCook;
+    public AudioSource MicrowaveDone;
+
+    public List<Food> = new List<Food>();
+
 
 
     // Start is called before the first frame update

@@ -6,13 +6,18 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Grabber),typeof(UIManager))]
 public class Player : MonoBehaviour
 {
+    
     GameObject handObj;
     Hand hand;
+
+    private CameraRotator CamRotator;
+    [Range(0, 1)] public float YCameraChangeThreshold;
 
     public Grabber grabber { get; private set; }
     private StudentManager studentManager;
     private InputController inputController;
     private UIManager UIManager;
+    private SoundManager soundManager;
 
     public Tray[] tray; //{ private set; get; }
 
@@ -24,7 +29,7 @@ public class Player : MonoBehaviour
 
     public Student[] currentlyServing = new Student[3];
 
-    public GameObject Selected { get; private set; }
+    public GameObject Selected;
 
     public FoodType currentType;
 
@@ -101,10 +106,11 @@ public class Player : MonoBehaviour
         handObj = GameObject.FindGameObjectWithTag("hand");
 
         hand = handObj.GetComponent<Hand>();
-       
+
+        CamRotator = GetComponentInChildren<CameraRotator>();
     }
 
- 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +130,10 @@ public class Player : MonoBehaviour
 
         UIManager.UpdateRequestText(currentType);
 
+        studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
+
+
+
     }
 
     private void Update()
@@ -136,9 +146,29 @@ public class Player : MonoBehaviour
             {
                 fillPosition(i,true);
             }
+
+            if(currentlyServing[i].setGoal)
+            {
+                tray[i].transform.root.gameObject.SetActive(false);
+            }
+            else
+            {
+                tray[i].transform.root.gameObject.SetActive(true);
+                currentlyServing[i].trayInStudent.SetActive(false);
+                //
+            }
+
         }
 
-       
+
+        if(Input.mousePosition.y > YCameraChangeThreshold*Screen.height)
+        {
+            CamRotator.RotateTowardsPosition(CameraPosition.ToChildren);
+        }
+        else
+        {
+            CamRotator.RotateTowardsPosition(CameraPosition.ToFood);
+        }
 
         //UIManager.UpdateIndexText();
         UIManager.DeactivateFoodInformation();
@@ -187,13 +217,17 @@ public class Player : MonoBehaviour
             {
                 if (mouseDownClickingObject)
                 {
+                   
                     door.isOpen = !door.isOpen;
+                    soundManager.MicrowaveDoor.Play();
                 }
             }
             else if (button)
             {
+                Selected = button.gameObject;
                 if (mouseDownClickingObject)
                 {
+                    Debug.Log("microwave button");
                     button.addTime();
                 }
             }
@@ -213,7 +247,6 @@ public class Player : MonoBehaviour
             }
         }
        
-
         if (Input.GetMouseButtonUp(0) && grabber.IsGrabbing)
         {
             grabber.stopGrabbing();
@@ -343,8 +376,8 @@ public class Player : MonoBehaviour
             StartCoroutine(UIManager.displayServed(likeness));
             tray[positionIndex].GiveFood(previousStudent) ;
 
+            previousStudent.isServed = true;
 
-            
         }
 
         Student student;

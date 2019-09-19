@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class StudentManager : MonoBehaviour
 {
-    public FoodScorer scorer;
+    public GameObject[] models;
+
+
+    private FoodScorer scorer;
     UIManager UIManager;
 
     public Transform[] lineTransform = new Transform[3];
@@ -96,7 +99,7 @@ public class StudentManager : MonoBehaviour
         {
             student = Instantiate(studentObj, SpawnPoint.position, Quaternion.identity).GetComponent<Student>();
             Debug.Log("student created");
-            student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime());
+            student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime(),models[Random.Range(0,models.Length-1)]);
             student.EnterPlayArea(lineTransform[positionFill].position);
             student.trayInStudent.SetActive(true);
             return true;

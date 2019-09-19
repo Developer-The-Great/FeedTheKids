@@ -87,7 +87,7 @@ public class FoodScorer : MonoBehaviour
                 fullyCookedCount++;
             }
 
-            if (food.FoodType != FoodType.Apple)
+            if (food.FoodType != FoodType.Apple && food.FoodType != FoodType.Gogurt)
             {
                 if (food.Coldness > 0.5f)
                 {

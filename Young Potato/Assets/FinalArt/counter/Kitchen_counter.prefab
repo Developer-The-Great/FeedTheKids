@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5409036364863320085}
   - component: {fileID: 1741846875512949996}
   - component: {fileID: 981565137607880226}
+  - component: {fileID: 1768939521776804657}
   m_Layer: 0
   m_Name: Kitchen_counter
   m_TagString: Untagged
@@ -92,3 +93,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4189575836506834876, guid: e783dc028c8a17a4b9a00c7a6d9c3c4d, type: 3}
+--- !u!65 &1768939521776804657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677930630314032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.032258432, y: 0.025628716, z: 0.3869901}
+  m_Center: {x: 0.062538244, y: 0.027945, z: -1.9339679e-16}
