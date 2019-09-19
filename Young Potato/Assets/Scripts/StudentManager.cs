@@ -136,7 +136,7 @@ public class StudentManager : MonoBehaviour
 
         for (int i = 0; i < studentBudgets.Length; i++)
         {
-            studentWaitTimeQueue.Enqueue(40 - (studentBudget[i]));
+            studentWaitTimeQueue.Enqueue(60 - 2*(studentBudget[i]));
         }
 
         StudentsServed = 0;

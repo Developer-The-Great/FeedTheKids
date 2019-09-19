@@ -97,7 +97,7 @@ MonoBehaviour:
   addedSeperation: 0
   foodType: 1
   BurnCoefficient: 1
-  cookTime: 12
+  cookTime: 20
   showFried: 0
   showBoildness: 0
   showBurntness: 0
