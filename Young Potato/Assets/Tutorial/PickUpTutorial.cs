@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PickUpTutorial : Tutorial
 {
+
     public override void CheckIfHappening()
     {
-        if (Input.GetMouseButtonUp(0))
+        
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             TutorialManager.Instance.CompletedTutorial();
-
+            
         }
+       
+
     }
 }

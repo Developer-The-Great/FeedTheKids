@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MicrowaveTutorial : Tutorial
 {
-    private MicrowaveDoor microwaveDoor;
-
     public override void CheckIfHappening()
     {
-        if (microwaveDoor.isOpen == true)
+
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             TutorialManager.Instance.CompletedTutorial();
-        }
-    }
 
+        }
+
+    }
 }

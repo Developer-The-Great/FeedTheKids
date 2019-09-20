@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ServeTutorial : Tutorial
 {
-    public List<string> Keys = new List<string>();
-
     public override void CheckIfHappening()
     {
 
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            TutorialManager.Instance.CompletedTutorial();
+            TutorialManager.Instance.CompletedAllTutorials();
+
         }
     }
 }

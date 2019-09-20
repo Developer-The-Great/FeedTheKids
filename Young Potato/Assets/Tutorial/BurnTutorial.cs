@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BurnTutorial : Tutorial
 {
-
-    Food food; 
     public override void CheckIfHappening()
     {
-        if (food.Friedness >= 1.01f )
+
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            //Burnt Food 
             TutorialManager.Instance.CompletedTutorial();
+
         }
+
     }
 
 }

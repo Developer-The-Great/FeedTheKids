@@ -18,6 +18,7 @@ public class Grabber : MonoBehaviour
 
     public bool IsGrabbing;
 
+
     public Vector3 MouseWorldPosition { set; get; }
 
     public GameObject grabDebug;
@@ -59,8 +60,8 @@ public class Grabber : MonoBehaviour
         grabbedObject.SetRayCastInvisibility(false);
         grabbedObject = null;
         IsGrabbing = false;
-        
-        if (IsGrabbing == false)
+
+        if (IsGrabbing == false )
         {
             soundManager.DropItem.Play();
         }

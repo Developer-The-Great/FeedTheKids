@@ -358,6 +358,7 @@ public class Food : Grabbable
         {
             readiness = Boildness;
         }
+
         return readiness;
     }
 
@@ -365,7 +366,6 @@ public class Food : Grabbable
     {
         if(IsCookedInTimeStep)
         {
-
             return;
         }
         
