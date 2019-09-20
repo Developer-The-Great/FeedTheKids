@@ -11,7 +11,7 @@ public class StudentStateChanger : MonoBehaviour
 
     private Student student;
 
-    [SerializeField]private float angeryness;
+    private float angeryness;
 
     // Start is called before the first frame update
     void Start()

@@ -97,7 +97,9 @@ public class Food : Grabbable
 
     public void Init(Vector3 pPositon,GameObject[] pFoodBits,Transform[] pCutLocations,
         Vector3 pOffset,Vector3 pCutOffset,Vector3[] localScale,
-        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,float pCookTime,Vector3 pInitialLoc,float pSeperation,FoodData data,GameObject pSmokeObj)
+        Vector3 pLiftingOffset,float pCostPerPiece,Quaternion pRotation,
+        float pCookTime,Vector3 pInitialLoc,float pSeperation,
+        FoodData data,GameObject pSmokeObj)
     {
 
         smokeObj = pSmokeObj;
