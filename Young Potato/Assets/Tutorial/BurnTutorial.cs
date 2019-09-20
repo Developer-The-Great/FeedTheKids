@@ -5,24 +5,14 @@ using UnityEngine;
 public class BurnTutorial : Tutorial
 {
 
-    private bool isCurrentTutorial = false;
-
-    public Transform HitTransform;
-
+    Food food; 
     public override void CheckIfHappening()
     {
-        isCurrentTutorial = true;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (!isCurrentTutorial)
-            return;
-
-        if (other.transform == HitTransform)
+        if (food.Friedness >= 1.01f )
         {
+            //Burnt Food 
             TutorialManager.Instance.CompletedTutorial();
-            isCurrentTutorial = false;
         }
     }
+
 }

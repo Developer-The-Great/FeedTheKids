@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class FeedbackTutorial : Tutorial
 {
-
-    private bool isCurrentTutorial = false;
-
-    public Transform HitTransform;
+    public TutorialManager tutorialManager;
+    private UIManager uiManager;
 
     public override void CheckIfHappening()
     {
-        isCurrentTutorial = true;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (!isCurrentTutorial)
-            return;
-
-        if (other.transform == HitTransform)
-        {
-            TutorialManager.Instance.CompletedTutorial();
-            isCurrentTutorial = false;
-        }
+      
+     
+            if (Input.GetKey(KeyCode.Space)) 
+            {
+                TutorialManager.Instance.CompletedAllTutorials();
+            }
+         
     }
 }

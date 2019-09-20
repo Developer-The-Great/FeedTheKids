@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class CookTutorial : Tutorial
 {
-    public List<string> Keys = new List<string>();
+    private Food food;
 
+    public void Start()
+    {
+        food = GameObject.FindGameObjectWithTag("Food").GetComponent<Food>();
+    }
     public override void CheckIfHappening()
     {
+      //  Debug.Log(food.Friedness);
 
-        if (Input.GetMouseButtonUp(1))
+        if (food.Friedness > 1.0f && food.Friedness < 1.5f)
         {
             TutorialManager.Instance.CompletedTutorial();
         }
+        
     }
 }

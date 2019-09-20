@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class MicrowaveTutorial : Tutorial
 {
-
-    private bool isCurrentTutorial = false;
-
-    public Transform HitTransform;
+    private MicrowaveDoor microwaveDoor;
 
     public override void CheckIfHappening()
     {
-        isCurrentTutorial = true;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (!isCurrentTutorial)
-            return;
-
-        if (other.transform == HitTransform)
+        if (microwaveDoor.isOpen == true)
         {
             TutorialManager.Instance.CompletedTutorial();
-            isCurrentTutorial = false;
         }
     }
+
 }
