@@ -3041,7 +3041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a49759b65f0f8448ce149e470ff790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YCameraChangeThreshold: 0.55
+  YCameraChangeThreshold: 0.59
   tray:
   - {fileID: 1813025014}
   - {fileID: 824857003}
