@@ -8,21 +8,13 @@ public class coldnessShower : MonoBehaviour
     [SerializeField]private float coldness;
     ParticleSystem particles;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         particles = GetComponent<ParticleSystem>();
-        
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-
         if (!food)
         { food = transform.root.gameObject.GetComponent<Food>(); }
         coldness = food.Coldness;

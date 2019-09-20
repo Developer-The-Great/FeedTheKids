@@ -10,16 +10,6 @@ public class InputController : MonoBehaviour
 
     public Vector2 MouseInput;
 
-
-   
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -27,10 +17,5 @@ public class InputController : MonoBehaviour
 
         MouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-
-
-
-
-        
     }
 }

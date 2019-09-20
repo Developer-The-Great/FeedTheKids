@@ -88,6 +88,7 @@
           <e p="Bubble.cs" t="Include" />
           <e p="BubbleGenerator.cs" t="Include" />
           <e p="CameraRotator.cs" t="Include" />
+          <e p="CameraZoomer.cs" t="Include" />
           <e p="coldnessShower.cs" t="Include" />
           <e p="Container.cs" t="Include" />
           <e p="Debugging" t="Include">
@@ -115,7 +116,6 @@
           <e p="SimpleCameraController.cs" t="Include" />
           <e p="Student.cs" t="Include" />
           <e p="StudentManager.cs" t="Include" />
-          <e p="TestScript.cs" t="Include" />
           <e p="Tray.cs" t="Include" />
           <e p="UIStuff" t="Include">
             <e p="Flicker.cs" t="Include" />

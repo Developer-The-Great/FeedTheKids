@@ -10,7 +10,7 @@ public class Knife : Grabbable
     public float acceptableDist = 0.01f;
     public BoxCollider knifePart;
     private Food food;
-   private SoundManager soundManager; 
+    private SoundManager soundManager; 
 
     private Vector3 initialLimitingOffset;
 
@@ -27,13 +27,22 @@ public class Knife : Grabbable
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
+
+    
+
     // Update is called once per frame
     void Update()
     {
-        if(player.Selected != null)
+
+        GameObject hoveredObj = player.ObjectCurrentlyHovered;
+        if (hoveredObj)
         {
-            food = player.Selected.GetComponent<Food>();
+
+            food = hoveredObj.GetComponent<Food>(); ;
         }
+
+
+        
 
         if (knifePositions.Count != 0)
         {
@@ -69,8 +78,6 @@ public class Knife : Grabbable
     {
         if (player.grabber.grabbedObject != null)
         {
-           
-            soundManager.Knife.Play();
             return player.grabber.grabbedObject.GetComponent<Knife>();
         }
         else
@@ -95,22 +102,22 @@ public class Knife : Grabbable
     {
 
 
-        if (!food) { return; }
-
+        if (!food)
+        {
+            Debug.Log("No food found");
+            return;
+        }
         else if(food && food.isOnCuttingBoard)
         {
             knifePositions.Enqueue(new Vector3(endPosition.x,food.transform.position.y,endPosition.z));
             knifePositions.Enqueue(transform.position + liftingOffset);
         }
 
-
-
     }
 
-    public void GoTo()
+    private void GoTo()
     {
         
-
         float distance = Vector3.Distance(transform.position + liftingOffset, knifePositions.Peek());
 
         if(distance < acceptableDist)

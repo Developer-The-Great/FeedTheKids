@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     private Text studentIndexText;
     private Text moneyEarnedText;
     private Text starvingText;
-    private Text requestText;
+    private Image[] requests = new Image[3];
 
 
     private Text finishText;
@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     private CanvasScaler scaler;
 
     private GameObject bManager;
-    [SerializeField] private Transform[] racks;
+    public Transform[] racks;
     [SerializeField] private GameObject[] bBills1;
     [SerializeField] private GameObject[] bBills2;
     [SerializeField] private GameObject[] bBills3;
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] tBills3;
 
     private GameObject earnings;
-    private GameObject buttons;
+    public GameObject buttons;
 
     private bool checkedWin = false;
     private GameObject[] stars = new GameObject[5];
@@ -63,6 +63,17 @@ public class UIManager : MonoBehaviour
 
     private GameObject[] spots = new GameObject[5];
 
+    private Transform[] billHolders = new Transform[3];
+    private Transform[] buttonHolders = new Transform[3];
+    private Transform[] bobbleHolders = new Transform[3];
+
+    public Sprite[] images = new Sprite[5];
+    public GameObject bobble;
+
+    private GameObject detailToggle;
+
+    [SerializeField] private Texture2D cursor;
+    
     private void Awake()
     {
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
@@ -94,7 +105,7 @@ public class UIManager : MonoBehaviour
         
         starvingText = GameObject.FindGameObjectWithTag("StarvingKidsText").GetComponent<Text>();
 
-        ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
+//        ingredientText = GameObject.FindGameObjectWithTag("ingredientText").GetComponent<Text>();
 
         served = GameObject.FindGameObjectWithTag("servingText").GetComponent<Text>();
 
@@ -129,13 +140,30 @@ public class UIManager : MonoBehaviour
         dislikeText = GameObject.Find("dislikeText").GetComponent<Text>();
         okText = GameObject.Find("okText").GetComponent<Text>();
         moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
-        requestText = GameObject.Find("request").GetComponent<Text>();
+        
+        bobble = GameObject.Find("Bobbles");
+        for (int i = 0; i < 3; i++)
+        {
+            requests[i] = bobble.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Image>();
+        }
 
         earnings = GameObject.FindGameObjectWithTag("Earnings");
         buttons = GameObject.FindGameObjectWithTag("Buttons");
 
         stars = GameObject.FindGameObjectsWithTag("Star");
         spots = GameObject.FindGameObjectsWithTag("TranStar");
+
+        Transform billHolder = GameObject.FindGameObjectWithTag("BillHolder").transform;
+        Transform buttonHolder = GameObject.FindGameObjectWithTag("ButtonHolder").transform;
+        Transform bobbleHolder = GameObject.FindGameObjectWithTag("BobbleHolder").transform;
+        for (int i = 0; i < 3; i++)
+        {
+            billHolders[i] = billHolder.GetChild(i);
+            buttonHolders[i] = buttonHolder.GetChild(i);
+            bobbleHolders[i] = bobbleHolder.GetChild(i);
+        }
+
+        detailToggle = GameObject.FindGameObjectWithTag("DetailToggle");
     }
 
     private void Start()
@@ -151,12 +179,15 @@ public class UIManager : MonoBehaviour
         okText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
         starvingText.gameObject.SetActive(false);
+        detailToggle.SetActive(false);
+        
+        Cursor.SetCursor(cursor, new Vector2(4.0f,0), CursorMode.Auto);
        
     }
 
     public void UpdateIngredientText()
     {
-        ingredientText.text = "Ingredient Cost: " + player.IngredientBudget;
+//        ingredientText.text = "Ingredient Cost: " + player.IngredientBudget;
     }
 
     public void UpdateDishText()
@@ -170,7 +201,7 @@ public class UIManager : MonoBehaviour
                 bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
             if (player.currentlyServing[i] == null) continue;
-            if (player.tray[i].DishCost > 10 || player.tray[i].DishCost > player.currentlyServing[i].StudentBudget)
+            if (player.tray[i].DishCost > 10 || (player.tray[i].DishCost > player.currentlyServing[i].StudentBudget && !player.currentlyServing[i].isBroke))
             {
                 for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
                 {
@@ -239,25 +270,28 @@ public class UIManager : MonoBehaviour
             case StatisfactionState.Dislike:
                 tastiness.text = "The student disliked that!";
                 soundManager.FoodBad.Play();
-                soundManager.Footsteps.Play();
-                //soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
             case StatisfactionState.Like:
                 tastiness.text = "The student liked that!";
                 soundManager.FoodGood.Play();
-                soundManager.Footsteps.Play();
-                //soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
                 soundManager.FoodOkay.Play();
-                soundManager.Footsteps.Play();
-               // soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
         }
 
            
 
+    }
+
+    void PlayLeavingSounds()
+    {
+        soundManager.Footsteps.Play();
+        soundManager.CashRegister.Play();
     }
 
     public void UpdateMoneyEarnedText()
@@ -268,28 +302,32 @@ public class UIManager : MonoBehaviour
         moneyEarnedText.text = "$" + earned;
     }
 
-    public void UpdateRequestText(FoodType foodType)
+    public void UpdateRequestText()
     {
-        switch(foodType)
+        for (int i = 0; i < 3; i++)
         {
-            case FoodType.Apple:
-                requestText.text = "Student Request: Apple" ;
-                break;
-            case FoodType.Chicken:
-                requestText.text = "Student Request: Chicken";
-                break;
-            case FoodType.Potato:
-                requestText.text = "Student Request: Potato";
-                break;
-            case FoodType.Rice:
-                requestText.text = "Student Request: Rice";
-                break;
-            case FoodType.None:
-                requestText.text = "Student Request: None";
-                break;
+            if (player.currentlyServing[i] == null) continue;
+            FoodType foodType = player.currentlyServing[i].preferedFood;
+            switch (foodType)
+            {
+                case FoodType.Apple:
+                    requests[i].sprite = images[0];
+                    break;
+                case FoodType.Chicken:
+                    requests[i].sprite  = images[1];
+                    break;
+                case FoodType.Potato:
+                    requests[i].sprite  = images[2];
+                    break;
+                case FoodType.Rice:
+                    requests[i].sprite  = images[3];
+                    break;
+                case FoodType.None:
+                    requests[i].sprite  = images[4];
+                    break;
 
+            }
         }
-        
 
 
 
@@ -336,10 +374,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Camera mainCamera = Camera.main;
+        for (int i = 0; i < 3; i++)
+        {
+            racks[i].position = mainCamera.WorldToScreenPoint(billHolders[i].position);
+            bobble.transform.GetChild(i).position = mainCamera.WorldToScreenPoint(bobbleHolders[i].position);
+            buttons.transform.GetChild(i).position = mainCamera.WorldToScreenPoint(buttonHolders[i].position);
+        }
+        
         if (studentManager.CheckWin() && !checkedWin)
         {
             checkedWin = true;
-            ingredientText.gameObject.SetActive(false);
             bManager.gameObject.SetActive(false);
             earnings.gameObject.SetActive(false);
             buttons.gameObject.SetActive(false);
@@ -349,6 +394,7 @@ public class UIManager : MonoBehaviour
             cost.gameObject.SetActive(false);
             moneyEarnedText.gameObject.SetActive(false);
             DeactivateFoodInformation();
+            bobble.SetActive(false);
 
             likedText.text = "Times food was liked " + studentManager.likeCount;
             dislikeText.text = "Times food was disliked " + studentManager.dislikeCount;
@@ -363,9 +409,7 @@ public class UIManager : MonoBehaviour
 
             endScreen.gameObject.SetActive(true);
             finishText.gameObject.SetActive(true);
-            likedText.gameObject.SetActive(true);
-            dislikeText.gameObject.SetActive(true);
-            okText.gameObject.SetActive(true);
+            detailToggle.SetActive(true);
             moneyText.gameObject.SetActive(true);
             starvingText.gameObject.SetActive(true);
 
@@ -420,5 +464,13 @@ public class UIManager : MonoBehaviour
     public void next3()
     {
         player.fillPosition(2,false);
+    }
+
+    public void toggleDetails()
+    {
+        bool stateToSet = !okText.gameObject.activeInHierarchy;
+        okText.gameObject.SetActive(stateToSet);
+        likedText.gameObject.SetActive(stateToSet);
+        dislikeText.gameObject.SetActive(stateToSet);
     }
 }

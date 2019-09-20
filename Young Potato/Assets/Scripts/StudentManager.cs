@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class StudentManager : MonoBehaviour
 {
-    public GameObject[] models;
+    public delegate void onStudentDestroy(int positionToFill);
 
+    public onStudentDestroy OnStudentDestroy;
+
+    public GameObject[] models;
 
     private FoodScorer scorer;
     UIManager UIManager;
@@ -59,8 +62,6 @@ public class StudentManager : MonoBehaviour
         }
     }
 
-    
-
     public float[] studentBudget
     {
         get
@@ -81,25 +82,23 @@ public class StudentManager : MonoBehaviour
     public int dislikeCount;
     public int starvingCount;
 
+   
+
 
     public void Next()
     {
         currentStudent++;
-
     }
 
-    public void AssignNutrition(float nutrition)
-    {
-        nutritionGiven[StudentIndex] = nutrition;
-    }
+    
 
     public bool CreateStudent(out Student student, int positionFill)
     {
         if(studentBudgetQueue.Count != 0)
         {
             student = Instantiate(studentObj, SpawnPoint.position, Quaternion.identity).GetComponent<Student>();
-            Debug.Log("student created");
-            student.Init(getNextStudentBudget(), 0, positionFill, this,getNextStudentRequest(), getNextStudentWaitTime(),models[Random.Range(0,models.Length-1)]);
+
+            student.Init(getNextStudentBudget(), positionFill, this,getNextStudentRequest(), getNextStudentWaitTime(),models[Random.Range(0,models.Length-1)]);
             student.EnterPlayArea(lineTransform[positionFill].position);
             student.trayInStudent.SetActive(true);
             return true;
@@ -107,7 +106,7 @@ public class StudentManager : MonoBehaviour
         else
         {
             student = null;
-            Debug.Log("line is finished");
+ 
             return false;
         }
         
@@ -123,7 +122,7 @@ public class StudentManager : MonoBehaviour
         studentBudgetQueue = new Queue<float>();
         studentRequestQueue = new Queue<FoodType>();
         studentWaitTimeQueue = new Queue<float>();
-        
+
 
         nutritionGiven = new float[studentBudgets.Length];
 
@@ -132,6 +131,8 @@ public class StudentManager : MonoBehaviour
            studentBudgetQueue.Enqueue(studentBudget[i]);
            
         }
+
+       
 
 
         for (int i = 0; i < studentBudgets.Length; i++)
@@ -183,6 +184,7 @@ public class StudentManager : MonoBehaviour
     public void DestroyStudent(Student student)
     {
         StudentsServed++;
+        OnStudentDestroy(StudentsServed);
         Destroy(student.gameObject);
     }
 

@@ -19,33 +19,20 @@ public class Player : MonoBehaviour
     private UIManager UIManager;
     private SoundManager soundManager;
 
-    public Tray[] tray; //{ private set; get; }
+    public Tray[] tray; 
 
-    [SerializeField] private float DishCost;
-    [SerializeField] private float IngredientCost;
-    [SerializeField] private float Budget;
-
-    [SerializeField] private int currentlySelectedStudent;
+    private float DishCost;
+    private float IngredientCost;
+    private float Budget;
 
     public Student[] currentlyServing = new Student[3];
 
-    public GameObject Selected;
+    public GameObject ObjectCurrentlyHovered { private set; get; }
 
     public FoodType currentType;
 
-    public int  currentStudentIndex
-    {
-        get
-        {
-            return currentlySelectedStudent;
-        }
-        set
-        {
-            currentlySelectedStudent = value;
-            
-        }
-    }
-
+    public int currentStudentIndex { private set; get; }
+    
     public float StudentBudget
     {
         get
@@ -93,9 +80,15 @@ public class Player : MonoBehaviour
 
     public bool CutMode;
 
+    private Queue<int> positionToFillQueue;
+    private Queue<int> fillStartIndexQueue;
+
+    public int[] fillStartIndex;
+    public int[] positionToFill;
+    public int firstPosition;
+
     private void Awake()
     {
-
 
         UIManager = GetComponent<UIManager>();
 
@@ -110,31 +103,66 @@ public class Player : MonoBehaviour
         hand = handObj.GetComponent<Hand>();
 
         CamRotator = GetComponentInChildren<CameraRotator>();
+
+        studentManager.OnStudentDestroy += checkIfCanFillPosition;
     }
 
-    
+    void checkIfCanFillPosition(int studentServed)
+    {
+        if(fillStartIndexQueue.Count != 0)
+        {
+            if(studentServed == fillStartIndexQueue.Peek())
+            {
+                fillStartIndexQueue.Dequeue();
 
-    // Start is called before the first frame update
+                if(positionToFillQueue.Count != 0)
+                {
+                    fillPosition(positionToFillQueue.Dequeue(), false);
+                }
+
+            }
+        }
+    }
+
     void Start()
     {
+        foreach(Tray trayInstance in tray)
+        {
+            trayInstance.transform.root.gameObject.SetActive(false);
+        }
         
         DishCost = 0;
         IngredientBudget = 0;
 
         Debug.Log("intialize player");
 
-        fillPosition(0,false);
-        fillPosition(1, false);
-        fillPosition(2, false);
+        //fillPosition(0,false);
+        fillPosition(firstPosition, false);
+        //fillPosition(2, false);
 
         StudentBudget = studentManager.studentBudget[0];
         UIManager.UpdateBudgetText();
 
-        UIManager.UpdateRequestText(currentType);
+        UIManager.UpdateRequestText();
 
         studentManager = GameObject.FindGameObjectWithTag("studentManager").GetComponent<StudentManager>();
 
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
+        positionToFillQueue = new Queue<int>();
+        fillStartIndexQueue = new Queue<int>();
+
+
+        for (int i = 0; i < positionToFill.Length; i++)
+        {
+            positionToFillQueue.Enqueue(positionToFill[i]);
+        }
+
+        for (int i = 0; i < fillStartIndex.Length; i++)
+        {
+            fillStartIndexQueue.Enqueue(fillStartIndex[i]);
+        }
+
 
     }
 
@@ -142,7 +170,13 @@ public class Player : MonoBehaviour
     {
         for(int i =0; i < currentlyServing.Length;i++)
         {
-            if(currentlyServing[i] == null) { continue; }
+            if(currentlyServing[i] == null)
+            {
+                tray[i].transform.root.gameObject.SetActive(false);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(false);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(false);
+                continue;
+            }
 
             if(currentlyServing[i].IsTiredOfWaiting)
             {
@@ -152,12 +186,18 @@ public class Player : MonoBehaviour
             if(currentlyServing[i].setGoal)
             {
                 tray[i].transform.root.gameObject.SetActive(false);
+                UIManager.racks[i].gameObject.SetActive(false);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(false);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(false);
             }
             else
             {
+                UIManager.racks[i].gameObject.SetActive(true);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(true);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(true);
                 tray[i].transform.root.gameObject.SetActive(true);
                 currentlyServing[i].trayInStudent.SetActive(false);
-                //
+                
             }
 
         }
@@ -192,7 +232,8 @@ public class Player : MonoBehaviour
             hand.SetHandPosition(Hit.point);
 
             GameObject HitObj = Hit.transform.root.gameObject;
-            Selected = HitObj;
+
+            ObjectCurrentlyHovered = HitObj;
 
             Grabbable grabbedObject = HitObj.GetComponent<Grabbable>();
 
@@ -226,7 +267,7 @@ public class Player : MonoBehaviour
             }
             else if (button)
             {
-                Selected = button.gameObject;
+
                 if (mouseDownClickingObject)
                 {
                     Debug.Log("microwave button");
@@ -240,11 +281,10 @@ public class Player : MonoBehaviour
 
                 if (student)
                 {
-                    currentlySelectedStudent = student.StudentIndex;
+                    currentStudentIndex = student.StudentIndex;
                     StudentBudget = student.StudentBudget;
                     DishCost = tray[student.StudentIndex].DishCost;
                     currentType = student.preferedFood;
-                    UIManager.UpdateRequestText(currentType);
                 }
             }
         }
@@ -265,6 +305,7 @@ public class Player : MonoBehaviour
             else if (grabber.grabbedObject is Knife knife)
             {
                 hand.SetGrabbingKnife();
+                CamRotator.RotateTowardsPosition(CameraPosition.ToKnife);
             }
 
 
@@ -272,29 +313,26 @@ public class Player : MonoBehaviour
 
         if(grabber.grabbedObject != null)
         {
-            if (grabber.grabbedObject is Knife knife && Input.GetMouseButtonUp(1))
+            
+            if (grabber.grabbedObject is Knife knife && Input.GetMouseButtonDown(1))
             {
+                
                 knife.isCutting = true;
                 knife.Slice(grabber.MouseWorldPosition);
                 knife.SetKinematic(true);
+                
             }
         }
-        
-
       
     }
-
-
 
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            fillPosition(currentlySelectedStudent,false);
+            fillPosition(currentStudentIndex,false);
 
         }
-
-        //DishBudget = tray[currentlySelectedStudent].DishCost;
     }
 
     private void handleGrabbable(Grabbable grabbable, bool mouseClickingOnObject)
@@ -317,15 +355,11 @@ public class Player : MonoBehaviour
         }
         else if (grabbable is Knife knife)
         {
-            
             if (NotCurrentlyGrabbing && mouseClickingOnObject)
             {
                 grabber.grabGrabbable(knife);
                 
-
             }
-            
-            
         }
     }
 
@@ -335,12 +369,9 @@ public class Player : MonoBehaviour
         {
             IngredientBudget += food.FoodCost;
             food.InContainer = false;
-
         }
-
     }
     
-
     public void fillPosition(int positionIndex, bool isTimeChecking)
     {
 
@@ -387,6 +418,7 @@ public class Player : MonoBehaviour
         if(studentManager.CreateStudent(out student, positionIndex))
         {
             currentlyServing[positionIndex] = student;
+            UIManager.UpdateRequestText();
         }
         else
         {
@@ -395,12 +427,4 @@ public class Player : MonoBehaviour
 
         UIManager.UpdateBudgetText();
     }
-
-
-    
-
-  
-
-
-   
 }

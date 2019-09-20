@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: cafeteria
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: e2083a46db2214f26a48025537a04b50, type: 3}
+        m_Texture: {fileID: 2800000, guid: af713ba01066c468da6966f4f4e5abe3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,15 +40,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0c12075becd024794abbc1ad922b6394, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4f7e0b59fc82f4e4ea7c966de0be2f51, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 6a3aa0e3fb4d04a74a12f0f24e89e52a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 92979d18ff7ac45f084a91150f2f2824, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 13a9fa69ce3c44ab288d8017eb6fb7d2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7be566064ce78433a92969f6f25eacc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -60,7 +60,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 0.258
+    - _GlossMapScale: 0.322
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0

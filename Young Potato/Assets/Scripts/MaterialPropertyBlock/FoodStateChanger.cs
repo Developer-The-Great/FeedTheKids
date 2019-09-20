@@ -14,13 +14,6 @@ public class FoodStateChanger : MonoBehaviour
 
     Food food;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-       
-        
-
-    }
     void Start()
     {
         
@@ -28,7 +21,6 @@ public class FoodStateChanger : MonoBehaviour
         _propBlock = new MaterialPropertyBlock();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!food)

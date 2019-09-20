@@ -40,7 +40,11 @@ TagManager:
   - Star
   - TranStar
   - SoundManager
-  - Food
+  - BillHolder
+  - DetailToggle
+  - ButtonHolder
+  - ToggleHolder
+  - BobbleHolder
   layers:
   - Default
   - TransparentFX
