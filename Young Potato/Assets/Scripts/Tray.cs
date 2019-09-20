@@ -13,7 +13,7 @@ public class Tray : Container
 
     private void Start()
     {
-        transform.parent.parent = null;
+        
         player.DishBudget = 0;
     }
 

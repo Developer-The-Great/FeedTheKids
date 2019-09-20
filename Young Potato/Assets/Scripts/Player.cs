@@ -126,6 +126,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        foreach(Tray trayInstance in tray)
+        {
+            trayInstance.transform.root.gameObject.SetActive(false);
+        }
         
         DishCost = 0;
         IngredientBudget = 0;
@@ -159,13 +163,20 @@ public class Player : MonoBehaviour
             fillStartIndexQueue.Enqueue(fillStartIndex[i]);
         }
 
+
     }
 
     private void Update()
     {
         for(int i =0; i < currentlyServing.Length;i++)
         {
-            if(currentlyServing[i] == null) { continue; }
+            if(currentlyServing[i] == null)
+            {
+                tray[i].transform.root.gameObject.SetActive(false);
+                UIManager.bobble.transform.GetChild(i).gameObject.SetActive(false);
+                UIManager.buttons.transform.GetChild(i).gameObject.SetActive(false);
+                continue;
+            }
 
             if(currentlyServing[i].IsTiredOfWaiting)
             {
