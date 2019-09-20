@@ -107,7 +107,7 @@ public class Student : MonoBehaviour
         if(isServed)
         {
             trayInStudent.SetActive(true);
-            soundManager.CashRegister.Play();
+            //soundManager.CashRegister.Play();
         }
     }
 

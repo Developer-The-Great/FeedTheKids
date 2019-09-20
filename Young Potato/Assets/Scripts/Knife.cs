@@ -78,8 +78,6 @@ public class Knife : Grabbable
     {
         if (player.grabber.grabbedObject != null)
         {
-           
-            soundManager.Knife.Play();
             return player.grabber.grabbedObject.GetComponent<Knife>();
         }
         else

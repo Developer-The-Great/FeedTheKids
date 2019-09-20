@@ -270,25 +270,28 @@ public class UIManager : MonoBehaviour
             case StatisfactionState.Dislike:
                 tastiness.text = "The student disliked that!";
                 soundManager.FoodBad.Play();
-                soundManager.Footsteps.Play();
-                soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
             case StatisfactionState.Like:
                 tastiness.text = "The student liked that!";
                 soundManager.FoodGood.Play();
-                soundManager.Footsteps.Play();
-                soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
             case StatisfactionState.Ok:
                 tastiness.text = "The student was ok with it...";
                 soundManager.FoodOkay.Play();
-                soundManager.Footsteps.Play();
-                soundManager.CashRegister.Play();
+                PlayLeavingSounds();
                 break;
         }
 
            
 
+    }
+
+    void PlayLeavingSounds()
+    {
+        soundManager.Footsteps.Play();
+        soundManager.CashRegister.Play();
     }
 
     public void UpdateMoneyEarnedText()
