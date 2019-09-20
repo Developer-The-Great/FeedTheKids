@@ -2109,6 +2109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a49759b65f0f8448ce149e470ff790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  YCameraChangeThreshold: 0
   tray:
   - {fileID: 1813025014}
   - {fileID: 824857003}
@@ -2121,6 +2122,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  Selected: {fileID: 0}
   currentType: 0
   CutMode: 1
 --- !u!114 &342958347
@@ -6374,7 +6376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6855596147415d47b710ad85969d06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorer: {fileID: 0}
+  models: []
   lineTransform:
   - {fileID: 976069061}
   - {fileID: 635872622}
@@ -14069,6 +14071,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431625959633809, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431625247838104, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849431626501484020, guid: 5c2c809eb7cb61e458bf3d7d196d5589,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2c809eb7cb61e458bf3d7d196d5589, type: 3}
