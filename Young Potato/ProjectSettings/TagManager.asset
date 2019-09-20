@@ -45,6 +45,7 @@ TagManager:
   - ButtonHolder
   - ToggleHolder
   - BobbleHolder
+  - grabber
   layers:
   - Default
   - TransparentFX

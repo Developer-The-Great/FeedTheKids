@@ -15,12 +15,17 @@ public class MicrowaveButton : MonoBehaviour
     public GameObject bar;
     public GameObject meter;
 
+    public SoundManager soundManager;
+
     private void Awake()
     {
         door = GameObject.FindGameObjectWithTag("MicrowaveDoor").GetComponent<MicrowaveDoor>();
 
         bar.SetActive(false);
-   
+
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
+
     }
 
     void Update()
@@ -33,6 +38,7 @@ public class MicrowaveButton : MonoBehaviour
             bar.SetActive(false);
             cookTime = 0;
             heatingThing.enabled = false;
+            soundManager.MicrowaveCook.Stop();
            
         }
     }
@@ -44,7 +50,7 @@ public class MicrowaveButton : MonoBehaviour
             bar.SetActive(true);
             heatingThing.enabled = true;
             cookTime = MaxCookTime;
-            
+            soundManager.MicrowaveCook.Play();
         }
        
     }

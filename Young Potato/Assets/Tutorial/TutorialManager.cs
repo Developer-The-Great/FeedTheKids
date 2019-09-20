@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -60,9 +61,10 @@ public class TutorialManager : MonoBehaviour
 
     public void CompletedAllTutorials()
     {
-        explanationText.text = "You have completed all the tutorials";
+        explanationText.text = "You've made it too the end! Hope you took note of everything. Press 'BACK' to back to the Menu.";
 
-        //loadnextscene
+        if (Input.GetKeyUp(KeyCode.M))
+            SceneManager.LoadScene(0);
     }
 
     public Tutorial GetTutorialByOrder(int Order)
