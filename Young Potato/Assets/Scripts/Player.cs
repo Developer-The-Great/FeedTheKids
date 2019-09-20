@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [Range(0, 1)] public float YCameraChangeThreshold;
 
     public Grabber grabber { get; private set; }
+
     private StudentManager studentManager;
     private InputController inputController;
     private UIManager UIManager;
