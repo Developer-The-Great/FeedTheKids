@@ -303,6 +303,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            if (player.currentlyServing[i] == null) continue;
             FoodType foodType = player.currentlyServing[i].preferedFood;
             switch (foodType)
             {
