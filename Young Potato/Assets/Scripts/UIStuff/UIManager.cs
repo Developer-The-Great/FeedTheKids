@@ -201,7 +201,7 @@ public class UIManager : MonoBehaviour
                 bRacks[i][j].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
             if (player.currentlyServing[i] == null) continue;
-            if (player.tray[i].DishCost > 10 || player.tray[i].DishCost > player.currentlyServing[i].StudentBudget)
+            if (player.tray[i].DishCost > 10 || (player.tray[i].DishCost > player.currentlyServing[i].StudentBudget && !player.currentlyServing[i].isBroke))
             {
                 for (int j = 0; j < player.currentlyServing[i].StudentBudget; j++)
                 {

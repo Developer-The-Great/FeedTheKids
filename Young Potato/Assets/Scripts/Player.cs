@@ -285,7 +285,6 @@ public class Player : MonoBehaviour
                     StudentBudget = student.StudentBudget;
                     DishCost = tray[student.StudentIndex].DishCost;
                     currentType = student.preferedFood;
-                    UIManager.UpdateRequestText();
                 }
             }
         }
@@ -419,6 +418,7 @@ public class Player : MonoBehaviour
         if(studentManager.CreateStudent(out student, positionIndex))
         {
             currentlyServing[positionIndex] = student;
+            UIManager.UpdateRequestText();
         }
         else
         {
